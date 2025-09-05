@@ -210,3 +210,22 @@ The project includes two comprehensive SOP documents:
 - Use `'@tailwindcss/postcss'` plugin, not `tailwindcss`
 - Ensure `autoprefixer` is included after Tailwind plugin
 - No additional configuration needed for v4
+
+## Tauri 2.0 macOS Compatibility
+
+### objc2 Debug Assertions Configuration
+
+**Critical for macOS compatibility**: Tauri 2.0 requires disabling debug assertions for the `objc2` package to support older macOS versions. Add this configuration to `Cargo.toml`:
+
+```toml
+[profile.dev.package.objc2]
+debug-assertions = false
+```
+
+**Why this is needed**: 
+- objc2 is the Rust binding to Objective-C runtime used by Tauri on macOS
+- Debug assertions in objc2 can cause runtime errors on older macOS versions
+- Disabling debug assertions maintains development functionality while ensuring compatibility
+- This configuration does not affect production builds (release profile)
+
+**Location**: Add this section in the root of `Cargo.toml`, typically after the `[package]` section and before or after other profile configurations.
