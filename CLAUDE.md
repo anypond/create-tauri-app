@@ -82,7 +82,9 @@ pnpm install
 - **Build Tool**: Vite 7.0.4
 - **Location**: `template/src/`
 - **Entry Point**: `src/main.tsx` → `src/App.tsx`
-- **Styling**: CSS modules with global styles in `src/App.css`
+- **Styling**: Tailwind CSS v4 with custom component system in `src/index.css`
+- **UI Components**: Radix UI with custom styling
+- **Theme System**: Built-in dark/light mode with CSS variables
 
 ### Backend (Tauri + Rust)
 - **Framework**: Tauri 2.0.0
@@ -150,3 +152,61 @@ The project includes two comprehensive SOP documents:
 - **Environment variables** are automatically set by the launcher scripts
 - **WSL2 GUI support** is configured for Windows development environments
 - **Template projects** should be created using the automation scripts to ensure consistency
+
+## Tailwind CSS v4 Implementation Notes
+
+### Critical Configuration Requirements
+
+**Tailwind CSS v4 does not require a config file** - The project uses zero-configuration approach with all settings defined in CSS via `@theme` directive.
+
+**PostCSS Configuration**: 
+- Only requires `postcss.config.js` with `@tailwindcss/postcss` plugin
+- No `tailwind.config.js` file needed (was removed for v4 compatibility)
+
+**CSS Structure in `template/src/index.css`**:
+- `@theme` block defines light mode color variables
+- `.dark` selector defines dark mode color variables
+- Custom component classes instead of `@apply` directives (v4 compatibility)
+- Gradient variables for theme switching: `--gradient-from` and `--gradient-to`
+
+### Dark Mode Implementation
+
+**Theme Switching**: 
+- Uses class-based strategy (`darkMode: "class"` in CSS)
+- Theme toggle component adds/removes `.dark` class from `<html>` element
+- CSS variables automatically switch between light and dark themes
+
+**Key Implementation Details**:
+- Background gradient switches from light (`#eff6ff` to `#e0e7ff`) to dark (`#111827` to `#1f2937`)
+- All component colors use CSS variables that change with theme
+- No JavaScript required for color transitions beyond class toggling
+
+### Component Styling Approach
+
+**Avoid `@apply` in v4**: 
+- Tailwind CSS v4 has limited `@apply` support
+- Use custom CSS classes with direct property definitions
+- Reference CSS variables for theming: `var(--color-primary)`, `var(--color-background)`, etc.
+
+**Component Classes**:
+- `.btn`, `.btn-primary`, `.btn-secondary`, `.btn-outline` for buttons
+- `.input` for form inputs
+- `.card`, `.card-header`, `.card-content`, `.card-title`, `.card-description` for cards
+- Typography classes: `.heading-1`, `.heading-2`, `.heading-3`, `.text-large`, `.text-small`
+
+### Common Development Issues and Solutions
+
+**Build Errors with `@theme`**:
+- Ensure `@theme` blocks only contain custom properties, not selectors
+- Move selector-based dark mode variables to separate `.dark` rule
+- Use `@layer` directives for component organization
+
+**Dark Mode Not Working**:
+- Verify theme toggle component properly adds/removes `.dark` class
+- Check that CSS variables are defined in both `:root` and `.dark` selectors
+- Ensure gradient variables are properly scoped for theme switching
+
+**PostCSS Configuration Issues**:
+- Use `'@tailwindcss/postcss'` plugin, not `tailwindcss`
+- Ensure `autoprefixer` is included after Tailwind plugin
+- No additional configuration needed for v4
