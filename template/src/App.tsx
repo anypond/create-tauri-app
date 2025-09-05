@@ -26,8 +26,8 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto max-w-4xl">
+    <div className="min-h-screen bg-gradient-to-br p-4">
+      <div className="container">
         {/* Header */}
         <header className="flex items-center justify-between py-6">
           <div className="flex items-center gap-md">

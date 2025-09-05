@@ -1,59 +1,73 @@
 @import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 84% 4.9%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 94.1%;
-  }
+/* Theme variables for light and dark mode */
+@theme {
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(222.2 84% 4.9%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(222.2 84% 4.9%);
+  --color-primary: hsl(221.2 83.2% 53.3%);
+  --color-primary-foreground: hsl(210 40% 98%);
+  --color-secondary: hsl(210 40% 96%);
+  --color-secondary-foreground: hsl(222.2 84% 4.9%);
+  --color-muted: hsl(210 40% 96%);
+  --color-muted-foreground: hsl(215.4 16.3% 46.9%);
+  --color-accent: hsl(210 40% 96%);
+  --color-accent-foreground: hsl(222.2 84% 4.9%);
+  --color-destructive: hsl(0 84.2% 60.2%);
+  --color-destructive-foreground: hsl(210 40% 98%);
+  --color-border: hsl(214.3 31.8% 91.4%);
+  --color-input: hsl(214.3 31.8% 91.4%);
+  --color-ring: hsl(221.2 83.2% 53.3%);
+  --radius: 0.5rem;
 }
 
+/* Dark mode theme variables */
+:root {
+  --gradient-from: #eff6ff;
+  --gradient-to: #e0e7ff;
+}
+
+.dark {
+  --color-background: hsl(222.2 84% 4.9%);
+  --color-foreground: hsl(210 40% 98%);
+  --color-card: hsl(222.2 84% 4.9%);
+  --color-card-foreground: hsl(210 40% 98%);
+  --color-primary: hsl(217.2 91.2% 59.8%);
+  --color-primary-foreground: hsl(222.2 84% 4.9%);
+  --color-secondary: hsl(217.2 32.6% 17.5%);
+  --color-secondary-foreground: hsl(210 40% 98%);
+  --color-muted: hsl(217.2 32.6% 17.5%);
+  --color-muted-foreground: hsl(215 20.2% 65.1%);
+  --color-accent: hsl(217.2 32.6% 17.5%);
+  --color-accent-foreground: hsl(210 40% 98%);
+  --color-destructive: hsl(0 62.8% 30.6%);
+  --color-destructive-foreground: hsl(210 40% 98%);
+  --color-border: hsl(217.2 32.6% 17.5%);
+  --color-input: hsl(217.2 32.6% 17.5%);
+  --color-ring: hsl(224.3 76.3% 94.1%);
+  --gradient-from: #111827;
+  --gradient-to: #1f2937;
+}
+
+/* Base styles */
 @layer base {
   * {
-    border-color: hsl(var(--border));
+    border-color: var(--color-border);
   }
 
   body {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+
+  /* Gradient background utilities */
+  .bg-gradient-to-br {
+    background-image: linear-gradient(to bottom right, var(--gradient-from), var(--gradient-to));
   }
 }
 
+/* Component styles */
 @layer components {
   .container {
     max-width: 56rem;
@@ -77,14 +91,6 @@
     }
   }
 
-  .card {
-    background-color: hsl(var(--card));
-    color: hsl(var(--card-foreground));
-    border: 1px solid hsl(var(--border));
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  }
-
   .btn {
     display: inline-flex;
     align-items: center;
@@ -98,12 +104,13 @@
     transition-duration: 150ms;
     padding: 0.5rem 1rem;
     border: 1px solid transparent;
+    cursor: pointer;
   }
 
   .btn:focus-visible {
     outline: 2px solid transparent;
     outline-offset: 2px;
-    box-shadow: 0 0 0 2px hsl(var(--ring));
+    box-shadow: 0 0 0 2px var(--color-ring);
   }
 
   .btn:disabled {
@@ -112,32 +119,32 @@
   }
 
   .btn-primary {
-    background-color: hsl(var(--primary));
-    color: hsl(var(--primary-foreground));
+    background-color: var(--color-primary);
+    color: var(--color-primary-foreground);
   }
 
   .btn-primary:hover {
-    background-color: hsl(var(--primary) / 0.9);
+    background-color: hsl(var(--color-primary) / 0.9);
   }
 
   .btn-secondary {
-    background-color: hsl(var(--secondary));
-    color: hsl(var(--secondary-foreground));
+    background-color: var(--color-secondary);
+    color: var(--color-secondary-foreground);
   }
 
   .btn-secondary:hover {
-    background-color: hsl(var(--secondary) / 0.8);
+    background-color: hsl(var(--color-secondary) / 0.8);
   }
 
   .btn-outline {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
-    border: 1px solid hsl(var(--input));
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    border: 1px solid var(--color-input);
   }
 
   .btn-outline:hover {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
+    background-color: var(--color-accent);
+    color: var(--color-accent-foreground);
   }
 
   .input {
@@ -145,8 +152,9 @@
     height: 2.25rem;
     width: 100%;
     border-radius: 0.375rem;
-    border: 1px solid hsl(var(--input));
-    background-color: transparent;
+    border: 1px solid var(--color-input);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
     padding: 0 0.75rem;
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -159,7 +167,7 @@
   .input:focus-visible {
     outline: 2px solid transparent;
     outline-offset: 2px;
-    box-shadow: 0 0 0 2px hsl(var(--ring));
+    box-shadow: 0 0 0 2px var(--color-ring);
   }
 
   .input:disabled {
@@ -168,9 +176,45 @@
   }
 
   .input::placeholder {
-    color: hsl(var(--muted-foreground));
+    color: var(--color-muted-foreground);
   }
 
+  .card {
+    background-color: var(--color-card);
+    color: var(--color-card-foreground);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+
+  .card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    padding: 1.5rem;
+  }
+
+  .card-content {
+    padding: 1.5rem;
+    padding-top: 0;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  .card-description {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: var(--color-muted-foreground);
+  }
+}
+
+/* Typography components */
+@layer components {
   .heading-1 {
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -197,67 +241,78 @@
     line-height: 1.75rem;
   }
 
-  .text-body {
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
-
   .text-small {
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
 }
 
+/* Utility classes */
 @layer utilities {
-  .gap-sm {
-    gap: 0.5rem;
+  .gap-sm { gap: 0.5rem; }
+  .gap-md { gap: 1rem; }
+  .gap-lg { gap: 1.5rem; }
+  
+  .p-sm { padding: 0.5rem; }
+  .p-md { padding: 1rem; }
+  .p-lg { padding: 1.5rem; }
+  
+  .px-sm { padding-left: 0.5rem; padding-right: 0.5rem; }
+  .py-sm { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+  .py-md { padding-top: 1rem; padding-bottom: 1rem; }
+  .py-lg { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+  
+  .mt-sm { margin-top: 0.5rem; }
+  .mb-sm { margin-bottom: 0.5rem; }
+  
+  .w-4 { width: 1rem; }
+  .h-4 { height: 1rem; }
+  .w-5 { width: 1.25rem; }
+  .h-5 { height: 1.25rem; }
+  .w-10 { width: 2.5rem; }
+  .h-10 { height: 2.5rem; }
+  
+  .space-y-8 > * + * {
+    margin-top: 2rem;
   }
-
-  .gap-md {
-    gap: 1rem;
+  
+  .fill-current {
+    fill: currentColor;
   }
-
-  .gap-lg {
-    gap: 1.5rem;
+  
+  /* Flexbox and Grid */
+  .flex { display: flex; }
+  .flex-col { flex-direction: column; }
+  .items-center { align-items: center; }
+  .items-start { align-items: flex-start; }
+  .justify-center { justify-content: center; }
+  .justify-between { justify-content: space-between; }
+  .grid { display: grid; }
+  .grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+  
+  @media (min-width: 768px) {
+    .md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .md\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
   }
-
-  .p-sm {
-    padding: 0.5rem;
-  }
-
-  .p-md {
-    padding: 1rem;
-  }
-
-  .p-lg {
-    padding: 1.5rem;
-  }
-
-  .px-sm {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-
-  .py-sm {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-  }
-
-  .py-md {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-
-  .py-lg {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-  }
-
-  .mt-sm {
-    margin-top: 0.5rem;
-  }
-
-  .mb-sm {
-    margin-bottom: 0.5rem;
-  }
+  
+  /* Background and Colors */
+  .bg-primary { background-color: var(--color-primary); }
+  .bg-muted { background-color: var(--color-muted); }
+  .bg-card { background-color: var(--color-card); }
+  
+  /* Text */
+  .text-center { text-align: center; }
+  .text-white { color: white; }
+  .text-foreground { color: var(--color-foreground); }
+  .text-muted-foreground { color: var(--color-muted-foreground); }
+  .font-bold { font-weight: 700; }
+  .font-medium { font-weight: 500; }
+  
+  /* Borders and Radius */
+  .border { border: 1px solid var(--color-border); }
+  .rounded { border-radius: 0.5rem; }
+  
+  /* Special utilities */
+  .min-h-screen { min-height: 100vh; }
+  .w-full { width: 100%; }
 }
