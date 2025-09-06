@@ -16,6 +16,7 @@
 ## 🛠️ 技术栈
 
 ### 前端
+
 - **React 19.1.0** - UI 框架
 - **TypeScript 5.8.3** - 类型系统
 - **Vite 7.0.4** - 构建工具
@@ -24,6 +25,7 @@
 - **Lucide React** - 图标库
 
 ### 后端
+
 - **Tauri 2.0.0** - 桌面应用框架
 - **Rust 1.89.0** - 系统编程语言
 
@@ -88,26 +90,28 @@ template/
 ### 配置文件
 
 **tailwind.config.js** - 主题配置：
+
 ```javascript
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
         },
         // 更多颜色...
-      }
-    }
-  }
+      },
+    },
+  },
 }
 ```
 
 **CSS 变量** - 在 `src/index.css` 中定义：
+
 ```css
 :root {
   --background: 0 0% 100%;
@@ -130,18 +134,15 @@ export default {
 
 ```typescript
 // Button 组件示例
-const buttonVariants = cva(
-  "基础样式类",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary text-primary-foreground",
-        secondary: "bg-secondary text-secondary-foreground",
-        outline: "border border-input bg-background",
-      }
-    }
-  }
-)
+const buttonVariants = cva('基础样式类', {
+  variants: {
+    variant: {
+      default: 'bg-primary text-primary-foreground',
+      secondary: 'bg-secondary text-secondary-foreground',
+      outline: 'border border-input bg-background',
+    },
+  },
+})
 ```
 
 ### 主题颜色使用
@@ -183,9 +184,9 @@ fn greet(name: &str) -> String {
 在 React 中调用 Rust 命令：
 
 ```typescript
-import { invoke } from "@tauri-apps/api/core";
+import { invoke } from '@tauri-apps/api/core'
 
-const result = await invoke("greet", { name: "World" });
+const result = await invoke('greet', { name: 'World' })
 ```
 
 ## 🌙 主题系统
@@ -204,6 +205,7 @@ import { ThemeToggle } from "./components/theme-toggle";
 ### 主题状态管理
 
 主题状态通过 CSS 类控制：
+
 - 浅色模式：`<html>` 元素无特殊类
 - 深色模式：`<html>` 元素添加 `.dark` 类
 
@@ -224,7 +226,7 @@ import { Button } from "./components/ui/button";
 ```typescript
 import { Input } from "./components/ui/input";
 
-<Input 
+<Input
   value={value}
   onChange={(e) => setValue(e.target.value)}
   placeholder="请输入内容..."
@@ -281,12 +283,14 @@ pnpm preview
 ### 常见问题
 
 1. **端口占用**
+
    ```bash
    # 查找占用 1420 端口的进程
    lsof -ti:1420 | xargs kill -9
    ```
 
 2. **依赖问题**
+
    ```bash
    # 清理并重新安装依赖
    rm -rf node_modules pnpm-lock.yaml
