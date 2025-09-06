@@ -82,7 +82,7 @@ pnpm install
 - **Build Tool**: Vite 7.0.4
 - **Location**: `template/src/`
 - **Entry Point**: `src/main.tsx` → `src/App.tsx`
-- **Styling**: Tailwind CSS v4 with custom component system in `src/index.css`
+- **Styling**: Tailwind CSS v3 with custom component system in `src/index.css`
 - **UI Components**: Radix UI with custom styling
 - **Theme System**: Built-in dark/light mode with CSS variables
 
@@ -153,63 +153,102 @@ The project includes two comprehensive SOP documents:
 - **WSL2 GUI support** is configured for Windows development environments
 - **Template projects** should be created using the automation scripts to ensure consistency
 
-## Tailwind CSS v4 Implementation Notes
+## Tailwind CSS v3 Implementation Notes
 
 ### Critical Configuration Requirements
 
-**Tailwind CSS v4 does not require a config file** - The project uses zero-configuration approach with all settings defined in CSS via `@theme` directive.
+**Tailwind CSS v3 Configuration**: 
+- Uses `tailwind.config.js` file for configuration
+- PostCSS configuration uses `tailwindcss` and `autoprefixer` plugins
+- CSS structure uses `@tailwind` directives and `@apply` syntax
 
-**PostCSS Configuration**: 
-- Only requires `postcss.config.js` with `@tailwindcss/postcss` plugin
-- No `tailwind.config.js` file needed (was removed for v4 compatibility)
+**Configuration Files**:
+- `tailwind.config.js` - Main configuration with theme extensions
+- `postcss.config.js` - PostCSS plugin configuration
+- `src/index.css` - Custom styles and theme variables
 
 **CSS Structure in `template/src/index.css`**:
-- `@theme` block defines light mode color variables
-- `.dark` selector defines dark mode color variables
-- Custom component classes instead of `@apply` directives (v4 compatibility)
-- Gradient variables for theme switching: `--gradient-from` and `--gradient-to`
+- `@tailwind base;` - Tailwind base styles
+- `@tailwind components;` - Component styles
+- `@tailwind utilities;` - Utility classes
+- `:root` and `.dark` selectors for theme variables
+- Custom component classes using `@apply` directives
 
-### Dark Mode Implementation
+### Theme System
 
-**Theme Switching**: 
-- Uses class-based strategy (`darkMode: "class"` in CSS)
-- Theme toggle component adds/removes `.dark` class from `<html>` element
-- CSS variables automatically switch between light and dark themes
+**Configuration**: 
+- Theme variables defined in `tailwind.config.js` using HSL format
+- CSS variables mapped to semantic names (`primary`, `secondary`, etc.)
+- Component variants use theme-configured colors
 
 **Key Implementation Details**:
-- Background gradient switches from light (`#eff6ff` to `#e0e7ff`) to dark (`#111827` to `#1f2937`)
-- All component colors use CSS variables that change with theme
-- No JavaScript required for color transitions beyond class toggling
+- Colors: `bg-primary`, `text-primary-foreground`, `bg-secondary`
+- States: `hover:bg-primary/90`, `disabled:opacity-50`
+- Components follow consistent theming patterns
 
 ### Component Styling Approach
 
-**Avoid `@apply` in v4**: 
-- Tailwind CSS v4 has limited `@apply` support
-- Use custom CSS classes with direct property definitions
-- Reference CSS variables for theming: `var(--color-primary)`, `var(--color-background)`, etc.
+**CVA (Class Variance Authority)**:
+- Button components use CVA for variant management
+- Consistent styling across all UI components
+- Full theme integration with semantic color names
 
-**Component Classes**:
-- `.btn`, `.btn-primary`, `.btn-secondary`, `.btn-outline` for buttons
-- `.input` for form inputs
-- `.card`, `.card-header`, `.card-content`, `.card-title`, `.card-description` for cards
-- Typography classes: `.heading-1`, `.heading-2`, `.heading-3`, `.text-large`, `.text-small`
+**Component Examples**:
+- `Button` variants: `default`, `secondary`, `outline`, `ghost`, `link`
+- `Card` components: `bg-card`, `text-card-foreground`
+- `Input` components: `border-input`, `bg-background`, `placeholder:text-muted-foreground`
 
-### Common Development Issues and Solutions
+### Theme Configuration Structure
 
-**Build Errors with `@theme`**:
-- Ensure `@theme` blocks only contain custom properties, not selectors
-- Move selector-based dark mode variables to separate `.dark` rule
-- Use `@layer` directives for component organization
+**Color System**:
+```javascript
+// tailwind.config.js
+colors: {
+  background: "hsl(var(--background))",
+  foreground: "hsl(var(--foreground))",
+  primary: {
+    DEFAULT: "hsl(var(--primary))",
+    foreground: "hsl(var(--primary-foreground))",
+  },
+  // ... more colors
+}
+```
 
-**Dark Mode Not Working**:
-- Verify theme toggle component properly adds/removes `.dark` class
-- Check that CSS variables are defined in both `:root` and `.dark` selectors
-- Ensure gradient variables are properly scoped for theme switching
+**CSS Variables**:
+```css
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  // ... more variables
+}
+```
 
-**PostCSS Configuration Issues**:
-- Use `'@tailwindcss/postcss'` plugin, not `tailwindcss`
-- Ensure `autoprefixer` is included after Tailwind plugin
-- No additional configuration needed for v4
+### Common Development Patterns
+
+**Using Theme Colors**:
+- `bg-primary` for primary backgrounds
+- `text-primary-foreground` for contrasting text
+- `border-input` for input field borders
+- `bg-muted` for subtle backgrounds
+
+**Component Variants**:
+- Use semantic names, not hardcoded colors
+- Support hover, focus, and disabled states
+- Maintain consistent spacing and typography
+
+### macOS Big Sur Compatibility
+
+**Browser Support**: 
+- Tailwind CSS v3 fully supports macOS Big Sur WebView
+- No issues with CSS variables or modern features
+- Compatible with Safari WebView and system WebViews
+
+**Performance Benefits**:
+- Smaller CSS bundle size compared to v4
+- Better build performance and compatibility
+- Reliable PurgeCSS optimization
 
 ## Tauri 2.0 macOS Compatibility
 

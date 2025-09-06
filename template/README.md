@@ -1,13 +1,13 @@
 # Tauri 2 + React + TypeScript Template
 
-现代化的桌面应用开发模板，基于 Tauri 2、React 19、TypeScript 和 Tailwind CSS v4 构建。
+现代化的桌面应用开发模板，基于 Tauri 2、React 19、TypeScript 和 Tailwind CSS v3 构建。
 
 ## ✨ 特性
 
 - 🚀 **Tauri 2** - 轻量级、安全的桌面应用框架
 - ⚛️ **React 19** - 最新的 React 框架
 - 📝 **TypeScript** - 类型安全的 JavaScript
-- 🎨 **Tailwind CSS v4** - 现代化的 CSS 框架
+- 🎨 **Tailwind CSS v3** - 成熟的 CSS 框架，完全兼容 macOS Big Sur
 - 🌙 **深色模式** - 内置主题切换功能
 - 🧩 **Radix UI** - 无障碍的 UI 组件库
 - 🔧 **Vite** - 快速的构建工具
@@ -19,7 +19,7 @@
 - **React 19.1.0** - UI 框架
 - **TypeScript 5.8.3** - 类型系统
 - **Vite 7.0.4** - 构建工具
-- **Tailwind CSS 4.1.13** - CSS 框架
+- **Tailwind CSS 3.4.17** - CSS 框架
 - **Radix UI** - UI 组件库
 - **Lucide React** - 图标库
 
@@ -76,49 +76,85 @@ template/
 
 ## 🎨 样式系统
 
-### Tailwind CSS v4
+### Tailwind CSS v3
 
-项目使用 Tailwind CSS v4，具有以下特点：
+项目使用 Tailwind CSS v3，具有以下特点：
 
-- **零配置** - 不需要 `tailwind.config.js` 文件
-- **CSS 内配置** - 使用 `@theme` 指令在 CSS 中配置
+- **成熟稳定** - 完全兼容 macOS Big Sur 和其他旧版本系统
+- **配置文件** - 使用 `tailwind.config.js` 进行配置
 - **主题系统** - 内置深色/浅色模式支持
+- **语义化命名** - 使用语义化的颜色名称
 
-### 主题变量
+### 配置文件
 
-所有颜色和样式变量都定义在 `src/index.css` 中：
+**tailwind.config.js** - 主题配置：
+```javascript
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        // 更多颜色...
+      }
+    }
+  }
+}
+```
 
+**CSS 变量** - 在 `src/index.css` 中定义：
 ```css
-@theme {
-  --color-background: hsl(0 0% 100%);
-  --color-foreground: hsl(222.2 84% 4.9%);
-  --color-primary: hsl(221.2 83.2% 53.3%);
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
   /* 更多变量... */
 }
 
 .dark {
-  --color-background: hsl(222.2 84% 4.9%);
-  --color-foreground: hsl(210 40% 98%);
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
   /* 深色模式变量... */
 }
 ```
 
 ### 组件样式
 
-所有组件都使用自定义 CSS 类，避免 `@apply` 指令的兼容性问题：
+使用 CVA (Class Variance Authority) 和 `@apply` 指令：
 
-```css
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  /* 更多样式... */
-}
+```typescript
+// Button 组件示例
+const buttonVariants = cva(
+  "基础样式类",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground",
+        secondary: "bg-secondary text-secondary-foreground",
+        outline: "border border-input bg-background",
+      }
+    }
+  }
+)
+```
 
-.btn-primary {
-  background-color: var(--color-primary);
-  color: var(--color-primary-foreground);
-}
+### 主题颜色使用
+
+```typescript
+// 在组件中使用
+<div className="bg-primary text-primary-foreground">
+  主要颜色背景，前景色文字
+</div>
+
+<div className="bg-muted text-muted-foreground">
+  次要颜色背景，次要文字
+</div>
 ```
 
 ## 🔧 Tauri 命令
