@@ -27,16 +27,16 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br p-4">
-      <div className="container">
+      <div className="container mx-auto px-4">
         {/* Header */}
         <header className="flex items-center justify-between py-6">
-          <div className="flex items-center gap-md">
+          <div className="flex items-center gap-4">
             <div className="flex items-center justify-center w-10 h-10 bg-primary rounded">
-              <span className="text-white font-bold">T</span>
+              <span className="text-primary-foreground font-bold">T</span>
             </div>
             <div>
-              <h1 className="heading-2 text-foreground">Tauri + React</h1>
-              <p className="text-small text-muted-foreground">现代化的桌面应用开发模板</p>
+              <h1 className="text-2xl font-bold text-foreground">Tauri + React</h1>
+              <p className="text-sm text-muted-foreground">现代化的桌面应用开发模板</p>
             </div>
           </div>
           <ThemeToggle />
@@ -45,23 +45,23 @@ function App() {
         {/* Main Content */}
         <main className="space-y-8">
           {/* Hero Section */}
-          <Card className="text-center p-lg">
-            <CardHeader className="gap-md">
-              <CardTitle className="heading-1 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+          <Card className="text-center p-6">
+            <CardHeader className="gap-4">
+              <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                 欢迎使用 Tauri + React
               </CardTitle>
-              <CardDescription className="text-large">
+              <CardDescription className="text-lg">
                 基于 Radix UI + Tailwind CSS 的现代化桌面应用模板
               </CardDescription>
             </CardHeader>
-            <CardContent className="gap-lg">
-              <div className="flex justify-center gap-md">
+            <CardContent className="gap-6">
+              <div className="flex justify-center gap-4">
                 <Button asChild variant="outline">
                   <a
                     href="https://tauri.app"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-sm"
+                    className="flex items-center gap-2"
                   >
                     <ExternalLink className="w-4 h-4" />
                     <span>Tauri 文档</span>
@@ -72,7 +72,7 @@ function App() {
                     href="https://react.dev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-sm"
+                    className="flex items-center gap-2"
                   >
                     <Github className="w-4 h-4" />
                     <span>React 文档</span>
@@ -85,7 +85,7 @@ function App() {
           {/* Interactive Demo */}
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-sm">
+              <CardTitle className="flex items-center gap-2">
                 <Settings className="w-5 h-5" />
                 <span>交互演示</span>
               </CardTitle>
@@ -93,9 +93,9 @@ function App() {
                 体验 Tauri 前后端交互功能
               </CardDescription>
             </CardHeader>
-            <CardContent className="gap-md">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
-                <div className="gap-sm">
+            <CardContent className="gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="gap-2">
                   <Label htmlFor="name">请输入您的名字</Label>
                   <Input
                     id="name"
@@ -128,10 +128,10 @@ function App() {
           </Card>
 
           {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-lg">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card>
               <CardHeader>
-                <CardTitle className="heading-3">🎨 现代化设计</CardTitle>
+                <CardTitle className="text-xl font-semibold">🎨 现代化设计</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
@@ -142,7 +142,7 @@ function App() {
 
             <Card>
               <CardHeader>
-                <CardTitle className="heading-3">⚡ 高性能</CardTitle>
+                <CardTitle className="text-xl font-semibold">⚡ 高性能</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
@@ -153,7 +153,7 @@ function App() {
 
             <Card>
               <CardHeader>
-                <CardTitle className="heading-3">🔧 易于扩展</CardTitle>
+                <CardTitle className="text-xl font-semibold">🔧 易于扩展</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
@@ -165,13 +165,13 @@ function App() {
         </main>
 
         {/* Footer */}
-        <footer className="py-lg text-center text-muted-foreground">
-          <div className="flex items-center justify-center gap-sm text-small">
+        <footer className="py-6 text-center text-muted-foreground">
+          <div className="flex items-center justify-center gap-2 text-sm">
             <span>使用</span>
             <Heart className="w-4 h-4 text-red-500 fill-current" />
             <span>构建</span>
           </div>
-          <p className="text-small mt-sm">
+          <p className="text-sm mt-2">
             Tauri 2 + React + TypeScript + Radix UI + Tailwind CSS
           </p>
         </footer>
