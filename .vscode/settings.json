@@ -50,5 +50,5 @@
     "tauri",
     "tsparser"
   ],
-  "Codegeex.CommitMessageStyle": "ConventionalCommits"
+  "Codegeex.CommitMessageStyle": "Auto"
 }

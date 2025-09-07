@@ -2,7 +2,8 @@ export default {
   extends: ['@commitlint/config-conventional'],
   parserPreset: {
     parserOpts: {
-      headerPattern: /^(?:(\p{Emoji})\s*)?(\w+)(?:\(([^)]+)\))?: (.+)$/u,
+      headerPattern:
+        /^(?:(\p{Emoji}\p{Emoji_Presentation}?\uFE0F?)\s*)?(\w+)(?:\(([^)]+)\))?: (.+)$/u,
       headerCorrespondence: ['emoji', 'type', 'scope', 'subject'],
     },
   },
