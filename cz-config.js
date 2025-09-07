@@ -39,11 +39,6 @@ export default {
         name: 'body',
         message: '提供更详细的更改描述:\n',
       },
-      {
-        type: 'input',
-        name: 'footer',
-        message: '列出任何破坏性更改或由此更改关闭的 issue:\n',
-      },
     ]).then(answers => {
       const maxLineWidth = 100
 

@@ -4,6 +4,9 @@
   "git.postCommitCommand": "sync",
   "git.autofetch": true,
   "git.path": "/usr/bin/git",
+  "git.enableCommitSigning": false,
+  "git.ignoreLegacyWarning": true,
+  "git.useEditorAsCommitInput": false,
   
   // GitLens 设置
   "gitlens.advanced.messages": {
