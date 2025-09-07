@@ -1,27 +1,27 @@
-import { useState } from "react";
-import { invoke } from "@tauri-apps/api/core";
-import { Button } from "./components/ui/button";
-import { Input } from "./components/ui/input";
-import { Label } from "./components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./components/ui/card";
-import { ThemeToggle } from "./components/theme-toggle";
-import { Github, ExternalLink, Heart, Settings } from "lucide-react";
+import { useState } from 'react'
+import { invoke } from '@tauri-apps/api/core'
+import { Button } from './components/ui/button'
+import { Input } from './components/ui/input'
+import { Label } from './components/ui/label'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card'
+import { ThemeToggle } from './components/theme-toggle'
+import { Github, ExternalLink, Heart, Settings } from 'lucide-react'
 
 function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [greetMsg, setGreetMsg] = useState('')
+  const [name, setName] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   async function greet() {
-    setIsLoading(true);
+    setIsLoading(true)
     try {
-      const result = await invoke("greet", { name });
-      setGreetMsg(result as string);
+      const result = await invoke('greet', { name })
+      setGreetMsg(result as string)
     } catch (error) {
-      setGreetMsg("调用失败，请检查后端服务");
-      console.error(error);
+      setGreetMsg('调用失败，请检查后端服务')
+      console.error(error)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
   }
 
@@ -89,9 +89,7 @@ function App() {
                 <Settings className="w-5 h-5" />
                 <span>交互演示</span>
               </CardTitle>
-              <CardDescription>
-                体验 Tauri 前后端交互功能
-              </CardDescription>
+              <CardDescription>体验 Tauri 前后端交互功能</CardDescription>
             </CardHeader>
             <CardContent className="gap-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -100,27 +98,21 @@ function App() {
                   <Input
                     id="name"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={e => setName(e.target.value)}
                     placeholder="输入名字..."
-                    onKeyPress={(e) => e.key === 'Enter' && greet()}
+                    onKeyPress={e => e.key === 'Enter' && greet()}
                   />
                 </div>
                 <div className="flex items-end">
-                  <Button 
-                    onClick={greet} 
-                    disabled={isLoading || !name.trim()}
-                    className="w-full"
-                  >
-                    {isLoading ? "调用中..." : "打招呼"}
+                  <Button onClick={greet} disabled={isLoading || !name.trim()} className="w-full">
+                    {isLoading ? '调用中...' : '打招呼'}
                   </Button>
                 </div>
               </div>
               {greetMsg && (
                 <Card className="bg-muted/50 border-primary/20">
                   <CardContent className="pt-6">
-                    <p className="text-center text-foreground font-medium">
-                      {greetMsg}
-                    </p>
+                    <p className="text-center text-foreground font-medium">{greetMsg}</p>
                   </CardContent>
                 </Card>
               )}
@@ -145,9 +137,7 @@ function App() {
                 <CardTitle className="text-xl font-semibold">⚡ 高性能</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>
-                  Tauri 提供轻量级的后端，Rust 确保安全和高性能
-                </CardDescription>
+                <CardDescription>Tauri 提供轻量级的后端，Rust 确保安全和高性能</CardDescription>
               </CardContent>
             </Card>
 
@@ -156,9 +146,7 @@ function App() {
                 <CardTitle className="text-xl font-semibold">🔧 易于扩展</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription>
-                  组件化架构，支持主题定制，适合各种业务场景
-                </CardDescription>
+                <CardDescription>组件化架构，支持主题定制，适合各种业务场景</CardDescription>
               </CardContent>
             </Card>
           </div>
@@ -171,13 +159,11 @@ function App() {
             <Heart className="w-4 h-4 text-red-500 fill-current" />
             <span>构建</span>
           </div>
-          <p className="text-sm mt-2">
-            Tauri 2 + React + TypeScript + Radix UI + Tailwind CSS
-          </p>
+          <p className="text-sm mt-2">Tauri 2 + React + TypeScript + Radix UI + Tailwind CSS</p>
         </footer>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

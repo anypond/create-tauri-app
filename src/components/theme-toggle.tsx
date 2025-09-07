@@ -1,26 +1,25 @@
-import * as React from "react"
-import { Moon, Sun } from "lucide-react"
+import * as React from 'react'
+import { Moon, Sun } from 'lucide-react'
 
-import { Button } from "./ui/button"
+import { Button } from './ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu"
+} from './ui/dropdown-menu'
 
 export function ThemeToggle() {
-  const [theme, setTheme] = React.useState<"light" | "dark" | "system">("light")
+  const [theme, setTheme] = React.useState<'light' | 'dark' | 'system'>('light')
 
   React.useEffect(() => {
     const root = window.document.documentElement
-    root.classList.remove("light", "dark")
+    root.classList.remove('light', 'dark')
 
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light"
+    if (theme === 'system') {
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
       root.classList.add(systemTheme)
     } else {
       root.classList.add(theme)
@@ -37,16 +36,22 @@ export function ThemeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-32">
-        <DropdownMenuItem onClick={() => setTheme("light")} className="flex items-center gap-2">
+        <DropdownMenuItem onClick={() => setTheme('light')} className="flex items-center gap-2">
           <Sun className="h-4 w-4 text-foreground" />
           浅色
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")} className="flex items-center gap-2">
+        <DropdownMenuItem onClick={() => setTheme('dark')} className="flex items-center gap-2">
           <Moon className="h-4 w-4 text-foreground" />
           深色
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")} className="flex items-center gap-2">
-          <svg className="h-4 w-4 text-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <DropdownMenuItem onClick={() => setTheme('system')} className="flex items-center gap-2">
+          <svg
+            className="h-4 w-4 text-foreground"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
             <line x1="8" y1="21" x2="16" y2="21"></line>
             <line x1="12" y1="17" x2="12" y2="21"></line>

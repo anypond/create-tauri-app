@@ -13,18 +13,18 @@
 
 提交信息必须遵循以下类型之一：
 
-| 类型 | 描述 | 示例 |
-|------|------|------|
-| `feat` | 新功能 | feat(auth): add OAuth2 login |
-| `fix` | 修复 bug | fix(button): prevent double click |
-| `docs` | 文档更新 | docs(readme): update installation steps |
-| `style` | 代码格式调整 | style(button): adjust padding |
-| `refactor` | 重构代码 | refactor(utils): simplify validation logic |
-| `test` | 添加或修改测试 | test(auth): add login unit tests |
-| `build` | 构建相关 | build(deps): update react version |
-| `ci` | CI/CD 配置 | ci(github): add workflow for PR |
-| `chore` | 其他修改 | chore: remove unused files |
-| `revert` | 回滚提交 | revert: feat(api) remove experimental endpoint |
+| 类型       | 描述           | 示例                                           |
+| ---------- | -------------- | ---------------------------------------------- |
+| `feat`     | 新功能         | feat(auth): add OAuth2 login                   |
+| `fix`      | 修复 bug       | fix(button): prevent double click              |
+| `docs`     | 文档更新       | docs(readme): update installation steps        |
+| `style`    | 代码格式调整   | style(button): adjust padding                  |
+| `refactor` | 重构代码       | refactor(utils): simplify validation logic     |
+| `test`     | 添加或修改测试 | test(auth): add login unit tests               |
+| `build`    | 构建相关       | build(deps): update react version              |
+| `ci`       | CI/CD 配置     | ci(github): add workflow for PR                |
+| `chore`    | 其他修改       | chore: remove unused files                     |
+| `revert`   | 回滚提交       | revert: feat(api) remove experimental endpoint |
 
 ## 提交格式
 
@@ -87,6 +87,7 @@ git commit -m "feat(auth): add login functionality"
 ### pre-commit
 
 提交前自动执行：
+
 - ESLint 检查并修复代码问题
 - Prettier 格式化代码
 
@@ -139,6 +140,7 @@ ERROR: Prettier found unformatted files
 ```
 
 **解决**：
+
 ```bash
 # 修复 ESLint 问题
 pnpm lint:fix

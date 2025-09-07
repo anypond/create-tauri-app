@@ -4,25 +4,33 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Tauri 2 + React + TypeScript template project designed to serve as a foundation for multiple desktop applications. The project follows a standardized development workflow using pnpm as the package manager and includes comprehensive automation scripts for environment setup and project creation.
+This is a Tauri 2 + React + TypeScript template project designed to serve as a foundation for multiple desktop applications. The project features a flat structure for simplicity and includes comprehensive automation scripts, code quality tools, and Git commit conventions.
 
 ## Project Structure
 
 ```
 tauri-template/
-├── doc/                    # Documentation and SOPs
-│   ├── sop-1-environment-setup.md
-│   ├── sop-2-project-creation.md
-│   └── 快速开始指南.md
+├── src/                    # React frontend source code
+│   ├── components/         # Reusable React components
+│   │   └── ui/            # UI components with Radix UI
+│   ├── lib/               # Utility functions
+│   └── assets/            # Static assets
+├── src-tauri/              # Tauri backend (Rust)
+│   ├── src/               # Rust source code
+│   ├── capabilities/       # Tauri capabilities
+│   └── icons/             # Application icons
 ├── scripts/                # Automation scripts
 │   ├── tauri-starter.sh    # Main launcher script
 │   ├── create-tauri-project.sh
 │   ├── verify-environment.sh
 │   └── check-wsl2-deps.sh
-└── template/               # Base template project
-    ├── src/                # React frontend
-    ├── src-tauri/          # Tauri backend (Rust)
-    └── package.json
+├── doc/                    # Documentation and SOPs
+├── .husky/                 # Git hooks (auto-installed)
+├── .vscode/                # VS Code configuration
+├── package.json            # Project dependencies and scripts
+├── README.md              # Project documentation
+├── COMMIT_GUIDE.md        # Git commit conventions guide
+└── ...                    # Configuration files
 ```
 
 ## Development Commands
@@ -30,6 +38,7 @@ tauri-template/
 ### Primary Development Workflow
 
 **Using the main launcher script (recommended):**
+
 ```bash
 # Show help and all options
 ./scripts/tauri-starter.sh --help
@@ -50,27 +59,42 @@ tauri-template/
 ./scripts/tauri-starter.sh --build
 ```
 
-**Direct pnpm commands (when working in template/ directory):**
+**Direct pnpm commands:**
+
 ```bash
+# Install dependencies (auto-installs Git hooks)
+pnpm install
+
 # Development
-cd template
 pnpm tauri dev
 
 # Build
 pnpm tauri build
 
-# Install dependencies
-pnpm install
+# Type checking
+pnpm typecheck
+
+# Lint and format
+pnpm lint
+pnpm format
+
+# Commit with conventional format
+pnpm commit
+
+# Release new version
+pnpm release
 ```
 
 ### Environment Management
 
 **Verify environment setup:**
+
 ```bash
 ./scripts/verify-environment.sh
 ```
 
 **Check WSL2 dependencies:**
+
 ```bash
 ./scripts/check-wsl2-deps.sh
 ```
@@ -78,30 +102,35 @@ pnpm install
 ## Architecture Overview
 
 ### Frontend (React + TypeScript)
+
 - **Framework**: React 19.1.1 with TypeScript 5.8.3
 - **Build Tool**: Vite 7.0.4
-- **Location**: `template/src/`
+- **Location**: `src/`
 - **Entry Point**: `src/main.tsx` → `src/App.tsx`
 - **Styling**: Tailwind CSS v3 with custom component system in `src/index.css`
 - **UI Components**: Radix UI with custom styling
 - **Theme System**: Built-in dark/light mode with CSS variables
 
 ### Backend (Tauri + Rust)
+
 - **Framework**: Tauri 2.0.0
 - **Language**: Rust 2021 edition
-- **Location**: `template/src-tauri/`
+- **Location**: `src-tauri/`
 - **Entry Point**: `src-tauri/src/main.rs` → `src-tauri/src/lib.rs`
 - **Commands**: Defined in `lib.rs` with `#[tauri::command]` macro
 
 ### Project Configuration
+
 - **Package Manager**: pnpm (required)
 - **Node.js**: v22.19.0 LTS (managed via nvm)
-- **Frontend Dist**: `template/dist/`
-- **Tauri Config**: `template/src-tauri/tauri.conf.json`
+- **Frontend Dist**: `dist/`
+- **Tauri Config**: `src-tauri/tauri.conf.json`
+- **Git Hooks**: Auto-installed via `prepare` script
 
 ## Key Development Patterns
 
 ### Tauri Command Pattern
+
 Commands are defined in Rust with the `#[tauri::command]` macro and registered in the `invoke_handler`. Example from `template/src-tauri/src/lib.rs`:
 
 ```rust
@@ -115,23 +144,26 @@ fn greet(name: &str) -> String {
 ```
 
 ### Frontend-Backend Communication
+
 React components call Rust commands using the `invoke` function:
 
 ```typescript
-import { invoke } from "@tauri-apps/api/core";
+import { invoke } from '@tauri-apps/api/core'
 
-const result = await invoke("greet", { name: "World" });
+const result = await invoke('greet', { name: 'World' })
 ```
 
 ## Environment Requirements
 
 ### Development Environment
+
 - **Node.js**: v22.19.0 LTS (via nvm)
 - **pnpm**: v10.15.1 (package manager)
 - **Rust**: 1.89.0 with cargo
 - **WSL2**: Required for Windows development with GUI support
 
 ### System Dependencies (WSL2/Linux)
+
 - `libwebkit2gtk-4.1-dev`
 - `build-essential`
 - `libxdo-dev`
@@ -157,17 +189,20 @@ The project includes two comprehensive SOP documents:
 
 ### Critical Configuration Requirements
 
-**Tailwind CSS v3 Configuration**: 
+**Tailwind CSS v3 Configuration**:
+
 - Uses `tailwind.config.js` file for configuration
 - PostCSS configuration uses `tailwindcss` and `autoprefixer` plugins
 - CSS structure uses `@tailwind` directives and `@apply` syntax
 
 **Configuration Files**:
+
 - `tailwind.config.js` - Main configuration with theme extensions
 - `postcss.config.js` - PostCSS plugin configuration
 - `src/index.css` - Custom styles and theme variables
 
 **CSS Structure in `template/src/index.css`**:
+
 - `@tailwind base;` - Tailwind base styles
 - `@tailwind components;` - Component styles
 - `@tailwind utilities;` - Utility classes
@@ -176,12 +211,14 @@ The project includes two comprehensive SOP documents:
 
 ### Theme System
 
-**Configuration**: 
+**Configuration**:
+
 - Theme variables defined in `tailwind.config.js` using HSL format
 - CSS variables mapped to semantic names (`primary`, `secondary`, etc.)
 - Component variants use theme-configured colors
 
 **Key Implementation Details**:
+
 - Colors: `bg-primary`, `text-primary-foreground`, `bg-secondary`
 - States: `hover:bg-primary/90`, `disabled:opacity-50`
 - Components follow consistent theming patterns
@@ -189,11 +226,13 @@ The project includes two comprehensive SOP documents:
 ### Component Styling Approach
 
 **CVA (Class Variance Authority)**:
+
 - Button components use CVA for variant management
 - Consistent styling across all UI components
 - Full theme integration with semantic color names
 
 **Component Examples**:
+
 - `Button` variants: `default`, `secondary`, `outline`, `ghost`, `link`
 - `Card` components: `bg-card`, `text-card-foreground`
 - `Input` components: `border-input`, `bg-background`, `placeholder:text-muted-foreground`
@@ -201,6 +240,7 @@ The project includes two comprehensive SOP documents:
 ### Theme Configuration Structure
 
 **Color System**:
+
 ```javascript
 // tailwind.config.js
 colors: {
@@ -215,6 +255,7 @@ colors: {
 ```
 
 **CSS Variables**:
+
 ```css
 :root {
   --background: 0 0% 100%;
@@ -228,24 +269,28 @@ colors: {
 ### Common Development Patterns
 
 **Using Theme Colors**:
+
 - `bg-primary` for primary backgrounds
 - `text-primary-foreground` for contrasting text
 - `border-input` for input field borders
 - `bg-muted` for subtle backgrounds
 
 **Component Variants**:
+
 - Use semantic names, not hardcoded colors
 - Support hover, focus, and disabled states
 - Maintain consistent spacing and typography
 
 ### macOS Big Sur Compatibility
 
-**Browser Support**: 
+**Browser Support**:
+
 - Tailwind CSS v3 fully supports macOS Big Sur WebView
 - No issues with CSS variables or modern features
 - Compatible with Safari WebView and system WebViews
 
 **Performance Benefits**:
+
 - Smaller CSS bundle size compared to v4
 - Better build performance and compatibility
 - Reliable PurgeCSS optimization
@@ -261,7 +306,8 @@ colors: {
 debug-assertions = false
 ```
 
-**Why this is needed**: 
+**Why this is needed**:
+
 - objc2 is the Rust binding to Objective-C runtime used by Tauri on macOS
 - Debug assertions in objc2 can cause runtime errors on older macOS versions
 - Disabling debug assertions maintains development functionality while ensuring compatibility
@@ -276,18 +322,21 @@ debug-assertions = false
 The project uses ESLint for code quality and consistency. Configuration is in `template/eslint.config.js`:
 
 **Key Plugins and Rules**:
+
 - **JavaScript**: Base ESLint recommended rules
 - **TypeScript**: @typescript-eslint plugin with recommended rules
 - **React**: React and React Hooks specific rules
 - **Prettier Integration**: eslint-config-prettier to avoid conflicts
 
 **Notable Rules**:
+
 - React JSX best practices (no React in scope, key requirements)
-- TypeScript strictness (warn on explicit any, unused vars with _ prefix)
+- TypeScript strictness (warn on explicit any, unused vars with \_ prefix)
 - Custom globals for browser and Node.js APIs
 - Disabled rules that conflict with modern patterns
 
 **Commands**:
+
 ```bash
 pnpm lint        # Check for issues
 pnpm lint:fix    # Auto-fix issues
@@ -298,6 +347,7 @@ pnpm lint:fix    # Auto-fix issues
 Prettier ensures consistent code formatting. Configuration is in `template/.prettierrc`:
 
 **Formatting Rules**:
+
 - No semicolons (`semi: false`)
 - Single quotes (`singleQuote: true`)
 - 2-space indentation (`tabWidth: 2`)
@@ -306,6 +356,7 @@ Prettier ensures consistent code formatting. Configuration is in `template/.pret
 - LF line endings (`endOfLine: "lf"`)
 
 **Commands**:
+
 ```bash
 pnpm format        # Format all files
 pnpm format:check  # Check if formatting is needed
@@ -314,11 +365,13 @@ pnpm format:check  # Check if formatting is needed
 ### Development Workflow
 
 **Recommended Process**:
+
 1. Configure editor for format-on-save
 2. Run `pnpm lint` and `pnpm format:check` before commits
 3. Use `pnpm lint:fix` and `pnpm format` to fix issues
 
 **VS Code Settings** (in `.vscode/settings.json`):
+
 ```json
 {
   "editor.formatOnSave": true,
@@ -332,8 +385,41 @@ pnpm format:check  # Check if formatting is needed
 ### Package Scripts
 
 The template includes these quality scripts in `package.json`:
+
 - `"lint": "eslint ."`
 - `"lint:fix": "eslint . --fix"`
 - `"format": "prettier --write ."`
 - `"format:check": "prettier --check ."`
 - `"typecheck": "tsc --noEmit"`
+
+## Git Commit Conventions
+
+The project uses conventional commits with automated enforcement:
+
+### Commit Types
+
+- `feat`: New features
+- `fix`: Bug fixes
+- `docs`: Documentation changes
+- `style`: Code style changes
+- `refactor`: Code refactoring
+- `test`: Test changes
+- `build`: Build system changes
+- `ci`: CI configuration changes
+- `chore`: Other changes
+
+### Usage
+
+```bash
+# Interactive commit (recommended)
+pnpm commit
+
+# The prepare script automatically installs Git hooks
+pnpm install
+```
+
+### Hook Configuration
+
+- **pre-commit**: Runs lint-staged to check and format staged files
+- **commit-msg**: Validates commit message format with commitlint
+- **Auto-install**: Hooks are automatically installed via `prepare` script
