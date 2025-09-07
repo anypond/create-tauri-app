@@ -1,8 +1,9 @@
 {
   // Git 设置
-  "git.enableSmartCommit": true,
+  "git.enableSmartCommit": false,
   "git.postCommitCommand": "sync",
   "git.autofetch": true,
+  "git.path": "/usr/bin/git",
   
   // GitLens 设置
   "gitlens.advanced.messages": {
