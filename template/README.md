@@ -250,6 +250,85 @@ import { Card, CardHeader, CardContent } from "./components/ui/card";
 
 ## 🛠️ 开发工具
 
+### 代码质量与格式化
+
+项目使用 ESLint 和 Prettier 来确保代码质量和一致的代码风格。
+
+#### ESLint 配置
+
+ESLint 配置文件 `eslint.config.js` 包含以下规则和插件：
+
+- **基础配置**: JavaScript 推荐规则
+- **TypeScript 支持**: @typescript-eslint 插件和规则
+- **React 支持**: React 和 React Hooks 规则
+- **Prettier 集成**: eslint-config-prettier 确保与 Prettier 兼容
+
+**主要规则**:
+- React 最佳实践（JSX 语法、组件规则）
+- TypeScript 类型检查和最佳实践
+- 代码质量规则（未使用变量、代码可达性等）
+- 自定义全局变量（浏览器 API、Node.js API）
+
+**使用 ESLint**:
+```bash
+# 检查代码问题
+pnpm lint
+
+# 自动修复问题
+pnpm lint:fix
+```
+
+#### Prettier 配置
+
+Prettier 配置文件 `.prettierrc` 定义代码格式化规则：
+
+```json
+{
+  "semi": false,           // 不使用分号
+  "singleQuote": true,     // 使用单引号
+  "tabWidth": 2,          // 缩进 2 个空格
+  "trailingComma": "es5", // ES5 允许的尾随逗号
+  "printWidth": 100,      // 每行最多 100 字符
+  "bracketSpacing": true, // 对象字面量中的括号之间添加空格
+  "arrowParens": "avoid", // 箭头函数参数尽可能省略括号
+  "endOfLine": "lf",      // 使用 LF 作为换行符
+  "bracketSameLine": false, // JSX 标签的 > 放在最后一行的末尾
+  "quoteProps": "as-needed" // 对象属性仅在必要时使用引号
+}
+```
+
+**使用 Prettier**:
+```bash
+# 格式化所有文件
+pnpm format
+
+# 检查文件是否需要格式化
+pnpm format:check
+```
+
+#### 开发工作流
+
+建议的开发流程：
+
+1. **编写代码** → **保存时自动格式化**（配置编辑器）
+2. **提交前** → **运行 lint 和 format 检查**
+3. **CI/CD** → **自动化代码质量检查**
+
+#### VS Code 集成
+
+安装以下扩展并启用保存时自动格式化：
+
+```json
+// .vscode/settings.json
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
+```
+
 ### 推荐的 IDE 设置
 
 - **VS Code** + **Tauri 扩展** + **rust-analyzer**
@@ -259,10 +338,12 @@ import { Card, CardHeader, CardContent } from "./components/ui/card";
 ### 有用的扩展
 
 - **ESLint** - 代码质量检查
-- **Prettier** - 代码格式化
+- **Prettier - Code formatter** - 代码格式化
 - **GitLens** - Git 增强功能
 
 ## 📝 脚本命令
+
+### 开发和构建
 
 ```bash
 # 开发模式
@@ -272,10 +353,26 @@ pnpm tauri dev
 pnpm tauri build
 
 # 类型检查
-tsc --noEmit
+pnpm typecheck
 
 # 预览构建结果
 pnpm preview
+```
+
+### 代码质量和格式化
+
+```bash
+# ESLint 检查
+pnpm lint
+
+# ESLint 自动修复
+pnpm lint:fix
+
+# Prettier 格式化
+pnpm format
+
+# Prettier 检查
+pnpm format:check
 ```
 
 ## 🔧 故障排除

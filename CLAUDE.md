@@ -268,3 +268,72 @@ debug-assertions = false
 - This configuration does not affect production builds (release profile)
 
 **Location**: Add this section in the root of `Cargo.toml`, typically after the `[package]` section and before or after other profile configurations.
+
+## ESLint and Prettier Code Quality Configuration
+
+### ESLint Configuration
+
+The project uses ESLint for code quality and consistency. Configuration is in `template/eslint.config.js`:
+
+**Key Plugins and Rules**:
+- **JavaScript**: Base ESLint recommended rules
+- **TypeScript**: @typescript-eslint plugin with recommended rules
+- **React**: React and React Hooks specific rules
+- **Prettier Integration**: eslint-config-prettier to avoid conflicts
+
+**Notable Rules**:
+- React JSX best practices (no React in scope, key requirements)
+- TypeScript strictness (warn on explicit any, unused vars with _ prefix)
+- Custom globals for browser and Node.js APIs
+- Disabled rules that conflict with modern patterns
+
+**Commands**:
+```bash
+pnpm lint        # Check for issues
+pnpm lint:fix    # Auto-fix issues
+```
+
+### Prettier Configuration
+
+Prettier ensures consistent code formatting. Configuration is in `template/.prettierrc`:
+
+**Formatting Rules**:
+- No semicolons (`semi: false`)
+- Single quotes (`singleQuote: true`)
+- 2-space indentation (`tabWidth: 2`)
+- ES5 trailing commas (`trailingComma: "es5"`)
+- 100 character line length (`printWidth: 100`)
+- LF line endings (`endOfLine: "lf"`)
+
+**Commands**:
+```bash
+pnpm format        # Format all files
+pnpm format:check  # Check if formatting is needed
+```
+
+### Development Workflow
+
+**Recommended Process**:
+1. Configure editor for format-on-save
+2. Run `pnpm lint` and `pnpm format:check` before commits
+3. Use `pnpm lint:fix` and `pnpm format` to fix issues
+
+**VS Code Settings** (in `.vscode/settings.json`):
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
+```
+
+### Package Scripts
+
+The template includes these quality scripts in `package.json`:
+- `"lint": "eslint ."`
+- `"lint:fix": "eslint . --fix"`
+- `"format": "prettier --write ."`
+- `"format:check": "prettier --check ."`
+- `"typecheck": "tsc --noEmit"`
