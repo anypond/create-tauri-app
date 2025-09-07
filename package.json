@@ -31,7 +31,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "cz-conventional-changelog-emoji"
+      "path": "./cz-config.js"
     }
   },
   "dependencies": {
@@ -65,7 +65,6 @@
     "@vitejs/plugin-react": "^4.6.0",
     "autoprefixer": "^10.4.21",
     "commitizen": "^4.3.1",
-    "cz-conventional-changelog-emoji": "^0.1.0",
     "eslint": "^9.35.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.37.5",
@@ -77,6 +76,7 @@
     "standard-version": "^9.5.0",
     "tailwindcss": "^3.4.1",
     "typescript": "~5.8.3",
-    "vite": "^7.0.4"
+    "vite": "^7.0.4",
+    "word-wrap": "^1.2.5"
   }
 }
