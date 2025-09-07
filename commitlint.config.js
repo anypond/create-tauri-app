@@ -6,7 +6,22 @@ export default {
       headerCorrespondence: ['emoji', 'type', 'scope', 'subject'],
     },
   },
+  plugins: [
+    {
+      rules: {
+        'header-emoji': ({ header }) => {
+          const emojiRegex = /(\p{Emoji})/u
+          if (!emojiRegex.test(header)) {
+            return [false, '提交消息必须以 emoji 开头']
+          }
+          return [true, '']
+        },
+      },
+    },
+  ],
   rules: {
+    'header-emoji': [2, 'always'],
+    // 允许的提交类型
     // 允许的提交类型
     'type-enum': [
       2,

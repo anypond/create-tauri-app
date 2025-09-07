@@ -49,7 +49,7 @@ export default {
       const scope = answers.scope.trim()
       const scopeWithParentheses = scope ? `(${scope})` : ''
 
-      // Format: ✨feat: subject 或 ✨feat(scope): subject
+      // Format: feat: subject 或 ✨feat: subject 或 ✨feat(scope): subject
       const head =
         `${typeEmoji}${answers.type}${scopeWithParentheses}: ${answers.subject.trim()}`.slice(
           0,
