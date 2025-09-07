@@ -47,8 +47,9 @@ export default {
     ]).then(answers => {
       const maxLineWidth = 100
 
-      // Get the emoji for the selected type
-      const typeEmoji = types.find(t => t.value === answers.type)?.name.split(' ')[0] || ''
+      // Get the emoji for the selected type - extract emoji from the beginning
+      const typeName = types.find(t => t.value === answers.type)?.name || ''
+      const typeEmoji = typeName.match(/^(\p{Emoji})/u)?.[1] || ''
 
       const scope = answers.scope.trim()
       const scopeWithParentheses = scope ? `(${scope})` : ''
