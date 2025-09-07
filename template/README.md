@@ -43,6 +43,18 @@
 pnpm install
 ```
 
+### 初始化 Git Hooks（重要！）
+
+由于是模板项目，Git hooks 需要手动初始化：
+
+```bash
+# 如果是新项目，先初始化 Git
+git init
+
+# 运行初始化脚本
+./scripts/setup-git-hooks.sh
+```
+
 ### 开发模式
 
 ```bash
@@ -72,6 +84,10 @@ template/
 │   │   ├── main.rs        # 应用入口
 │   │   └── lib.rs         # Tauri 命令定义
 │   └── tauri.conf.json    # Tauri 配置
+├── scripts/               # 脚本工具
+│   ├── check-git-and-install.js  # 自动安装 Git hooks
+│   └── setup-git-hooks.sh        # 手动设置脚本
+├── .husky/                # Git hooks 配置
 ├── dist/                  # 构建输出
 └── package.json           # 项目配置
 ```
