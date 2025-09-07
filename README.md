@@ -1,6 +1,16 @@
 # Tauri 2 + React + TypeScript Template
 
-现代化的桌面应用开发模板，基于 Tauri 2、React 19、TypeScript 和 Tailwind CSS v3 构建。
+现代化的桌面应用开发模板，基于"开箱即用"和"最佳实践"的设计理念构建。
+
+## 🎯 设计理念
+
+本项目遵循以下核心原则：
+
+1. **开箱即用** - 包含所有必要的配置和工具，克隆后即可开始开发
+2. **最佳实践** - 集成了业界公认的最佳实践工具和流程
+3. **开发体验优先** - 优化开发者的日常使用体验
+4. **自动化** - 自动化代码检查、格式化和提交规范
+5. **可维护性** - 清晰的项目结构和文档
 
 ## ✨ 特性
 
@@ -13,7 +23,7 @@
 - 🔧 **Vite** - 快速的构建工具
 - 📦 **pnpm** - 高效的包管理器
 - ✅ **ESLint + Prettier** - 代码质量和格式化
-- 📝 **Conventional Commits** - 规范的提交信息
+- 📝 **Conventional Commits** - 规范的提交信息（支持 emoji）
 - 🔒 **Git Hooks** - 自动化的代码检查
 
 ## 🛠️ 技术栈
@@ -81,6 +91,37 @@ pnpm tauri build
 ├── package.json           # 项目配置
 └── dist/                  # 构建输出
 ```
+
+### 设计考虑
+
+1. **扁平结构** - 避免过深的嵌套目录，提高可读性
+2. **职责分离** - 前后端代码明确分离，便于团队协作
+3. **配置集中** - 所有配置文件放在根目录，便于维护
+4. **文档驱动** - 完善的文档系统，包括 SOP 和设计说明
+
+## 🏗️ 架构设计
+
+### 技术选型理由
+
+#### 前端技术栈
+
+- **React 19** - 最新的 React 版本，提供最佳的性能和开发体验
+- **TypeScript** - 提供类型安全，减少运行时错误
+- **Vite** - 极快的构建速度和开发服务器热更新
+- **Tailwind CSS v3** - 成熟稳定的 CSS 框架，完全兼容旧系统
+- **Radix UI** - 无障碍、可定制的 UI 组件基础库
+
+#### 后端技术栈
+
+- **Tauri 2** - 轻量、安全的桌面应用框架，比 Electron 更节省资源
+- **Rust** - 系统级编程语言，提供内存安全和极致性能
+
+#### 开发工具
+
+- **pnpm** - 高效的包管理器，节省磁盘空间和提高安装速度
+- **ESLint + Prettier** - 代码质量和格式化的黄金组合
+- **Husky + lint-staged** - 自动化的 Git hooks
+- **Commitizen + commitlint** - 规范化的提交信息管理
 
 ## 🎨 样式系统
 
@@ -355,23 +396,55 @@ Git hooks 会在 `pnpm install` 时自动安装，无需手动配置。
 
 ### Commit-msg Hook
 
-验证提交信息是否符合 Conventional Commits 规范。
+验证提交信息是否符合 Conventional Commits 规范，支持 emoji 格式。
 
-### 使用流程
+### Git 提交规范
+
+项目使用 Conventional Commits 规范，并支持 emoji：
+
+#### 支持的提交格式
+
+1. **带 emoji（推荐）**：`✨feat: 添加新功能`
+2. **带 scope**：`🐛fix(ui): 修复按钮样式`
+3. **不带 emoji**：`fix: 简单修复`
+
+#### 提交类型
+
+| Emoji | 类型     | 说明           |
+| ----- | -------- | -------------- |
+| ✨    | feat     | 新功能         |
+| 🐛    | fix      | 修复 bug       |
+| 📚    | docs     | 文档更新       |
+| 💎    | style    | 代码格式调整   |
+| 📦    | refactor | 重构           |
+| 🚨    | test     | 增加测试       |
+| 🛠    | build    | 构建相关变动   |
+| ⚙️    | ci       | CI/CD 配置变动 |
+| ♻️    | chore    | 其他修改       |
+| 🗑    | revert   | 回滚           |
+
+#### 使用流程
 
 1. **开发代码**
 2. **暂存更改**：`git add .`
 3. **提交代码**：
 
    ```bash
-   # 推荐：使用交互式提交
+   # 推荐：使用交互式提交（自动添加 emoji）
    pnpm commit
 
-   # 或直接提交（需要符合规范）
-   git commit -m "feat: add new feature"
+   # 或手动提交（需符合规范）
+   git commit -m "✨feat: add new feature"
+   git commit -m "🐛fix(auth): fix login issue"
    ```
 
 4. **Hooks 自动执行**：检查代码质量和提交信息格式
+
+#### 配置说明
+
+- **commitlint**: 使用自定义解析器支持 emoji 格式
+- **commitizen**: 交互式提交工具，自动添加 emoji
+- **scope**: 可选的影响范围，如 `(ui)`、`(auth)` 等
 
 ### 推荐的 IDE 设置
 
@@ -386,6 +459,53 @@ Git hooks 会在 `pnpm install` 时自动安装，无需手动配置。
 - **GitLens** - Git 增强功能
 - **Commitizen** - Conventional Commits 支持
 - **Git Graph** - Git 可视化操作
+
+## 🔄 开发工作流
+
+### 1. 环境准备
+
+```bash
+# 验证环境设置
+./scripts/verify-environment.sh
+
+# 安装依赖（自动配置 Git hooks）
+pnpm install
+```
+
+### 2. 日常开发
+
+```bash
+# 启动开发服务器
+pnpm tauri dev
+
+# 编辑器会自动格式化代码（ESLint + Prettier）
+# 享受实时热更新和类型检查
+```
+
+### 3. 代码提交
+
+```bash
+# 暂存更改
+git add .
+
+# 交互式提交（推荐，自动添加 emoji）
+pnpm commit
+
+# 或手动提交（需符合规范）
+git commit -m "✨feat: add new feature"
+```
+
+### 4. 版本发布
+
+```bash
+# 自动生成版本号和更新日志
+pnpm release
+
+# 指定版本类型
+pnpm release:patch   # 补丁版本
+pnpm release:minor  # 次版本
+pnpm release:major  # 主版本
+```
 
 ## 📝 脚本命令
 
@@ -472,8 +592,16 @@ pnpm release:major  # 主版本   (1.0.0 → 2.0.0)
 
 ## 📚 相关文档
 
+### 项目文档
+
+- [环境设置指南](./doc/sop-1-environment-setup.md) - 完整的环境配置流程
+- [项目创建指南](./doc/sop-2-project-creation.md) - 标准化的项目创建流程
+- [Git 提交规范](./COMMIT_GUIDE.md) - 提交信息格式和最佳实践
+
+### 技术文档
+
 - [Tauri 文档](https://tauri.app/)
 - [React 文档](https://react.dev/)
-- [Tailwind CSS v4 文档](https://tailwindcss.com/)
+- [Tailwind CSS v3 文档](https://tailwindcss.com/)
 - [TypeScript 文档](https://www.typescriptlang.org/)
 - [Vite 文档](https://vitejs.dev/)

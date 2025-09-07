@@ -173,10 +173,11 @@ const result = await invoke('greet', { name: 'World' })
 
 ## SOP Documents
 
-The project includes two comprehensive SOP documents:
+The project includes comprehensive SOP documents:
 
 1. **sop-1-environment-setup.md**: Complete environment setup including nvm, Node.js, pnpm, Rust, and WSL2 configuration
 2. **sop-2-project-creation.md**: Step-by-step project creation following standardized patterns
+3. **README.md**: Contains detailed project design information including architecture, workflow, and best practices
 
 ## Important Notes
 
@@ -394,25 +395,40 @@ The template includes these quality scripts in `package.json`:
 
 ## Git Commit Conventions
 
-The project uses conventional commits with automated enforcement:
+The project uses conventional commits with emoji support and automated enforcement:
 
-### Commit Types
+### Commit Format
 
-- `feat`: New features
-- `fix`: Bug fixes
-- `docs`: Documentation changes
-- `style`: Code style changes
-- `refactor`: Code refactoring
-- `test`: Test changes
-- `build`: Build system changes
-- `ci`: CI configuration changes
-- `chore`: Other changes
+The project supports three commit message formats:
+
+1. **With emoji (recommended)**: `✨feat: 添加新功能`
+2. **With emoji and scope**: `🐛fix(ui): 修复按钮样式`
+3. **Without emoji**: `fix: 简单修复`
+
+### Supported Commit Types
+
+| Emoji | Type     | Description    |
+| ----- | -------- | -------------- |
+| ✨    | feat     | 新功能         |
+| 🐛    | fix      | 修复 bug       |
+| 📚    | docs     | 文档更新       |
+| 💎    | style    | 代码格式调整   |
+| 📦    | refactor | 重构           |
+| 🚨    | test     | 增加测试       |
+| 🛠    | build    | 构建相关变动   |
+| ⚙️    | ci       | CI/CD 配置变动 |
+| ♻️    | chore    | 其他修改       |
+| 🗑    | revert   | 回滚           |
 
 ### Usage
 
 ```bash
-# Interactive commit (recommended)
+# Interactive commit with emoji support (recommended)
 pnpm commit
+
+# Manual commit (must follow format)
+git commit -m "✨feat: add new feature"
+git commit -m "🐛fix(auth): fix login issue"
 
 # The prepare script automatically installs Git hooks
 pnpm install
@@ -423,3 +439,21 @@ pnpm install
 - **pre-commit**: Runs lint-staged to check and format staged files
 - **commit-msg**: Validates commit message format with commitlint
 - **Auto-install**: Hooks are automatically installed via `prepare` script
+- **Scope support**: Optional scope in parentheses (e.g., `(ui)`, `(auth)`)
+
+### Commitlint Configuration
+
+The project uses custom commitlint configuration to support emoji format:
+
+- Parser pattern: `^(?:(\p{Emoji})\s*)?(\w+)(?:\(([^)]+)\))?: (.+)$/u`
+- Header correspondence: `['emoji', 'type', 'scope', 'subject']`
+- Maximum header length: 100 characters (including emoji)
+
+### Commitizen Configuration
+
+Custom commitizen configuration (`cz-config.js`) provides:
+
+- Interactive prompts for commit type, scope, and message
+- Automatic emoji insertion based on selected type
+- Optional scope field for better change tracking
+- Proper formatting with no space between emoji and type
