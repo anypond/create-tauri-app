@@ -45,5 +45,6 @@
   "cSpell.words": [
     "tauri",
     "tsparser"
-  ]
+  ],
+  "Codegeex.CommitMessageStyle": "ConventionalCommits"
 }
