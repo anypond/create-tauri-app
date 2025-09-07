@@ -13,7 +13,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
-    "prepare": "husky install",
+    "prepare": "husky",
     "commit": "git-cz",
     "release": "standard-version",
     "release:minor": "standard-version --release-as minor",
