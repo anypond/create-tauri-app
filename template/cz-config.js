@@ -66,7 +66,7 @@ export default {
       const body = wrap(answers.body, wrapOptions)
       const footer = wrap(answers.footer, wrapOptions)
 
-      commit(`${head}\n\n${body}\n\n${footer}`)
+      commit(head + '\n\n' + body + '\n\n' + footer)
     })
   },
 }

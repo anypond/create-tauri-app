@@ -1,13 +1,32 @@
 import js from '@eslint/js'
+import react from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
+import tseslint from '@typescript-eslint/eslint-plugin'
+import tsparser from '@typescript-eslint/parser'
 import prettierConfig from 'eslint-config-prettier'
 
 export default [
   {
-    ignores: ['node_modules/**', 'dist/**', 'template/**'],
+    ignores: [
+      'node_modules/**',
+      'dist/**',
+      'template/src-tauri/target/**',
+      'template/**/*.{config.js}',
+      'template/**/cz-config.js',
+      'template/**/commitlint.config.js',
+      'template/**/tailwind.config.js',
+      'template/**/postcss.config.js',
+      'template/**/vite.config.ts',
+      'template/**/test-*.{js,jsx,ts,tsx}',
+      'test-*.{js,jsx,ts,tsx}',
+    ],
   },
   js.configs.recommended,
+
+  // Main project configuration (for Node.js scripts)
   {
     files: ['**/*.{js,mjs}'],
+    ignores: ['template/**/*'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
@@ -66,5 +85,90 @@ export default [
       'prefer-object-spread': 'error',
     },
   },
+
+  // Template project configuration (React + TypeScript)
+  {
+    files: ['template/**/*.{js,jsx,ts,tsx}'],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true,
+        },
+        project: './template/tsconfig.json',
+      },
+    },
+    globals: {
+      window: 'readonly',
+      document: 'readonly',
+      console: 'readonly',
+      process: 'readonly',
+      __dirname: 'readonly',
+      HTMLElement: 'readonly',
+      HTMLButtonElement: 'readonly',
+      HTMLDivElement: 'readonly',
+      HTMLInputElement: 'readonly',
+      HTMLSpanElement: 'readonly',
+      HTMLParagraphElement: 'readonly',
+      HTMLHeadingElement: 'readonly',
+      MutationObserver: 'readonly',
+      fetch: 'readonly',
+      setTimeout: 'readonly',
+      clearTimeout: 'readonly',
+      setImmediate: 'readonly',
+      MessageChannel: 'readonly',
+      performance: 'readonly',
+      CustomEvent: 'readonly',
+      __REACT_DEVTOOLS_GLOBAL_HOOK__: 'readonly',
+    },
+    plugins: {
+      '@typescript-eslint': tseslint,
+      react,
+      'react-hooks': reactHooks,
+    },
+    rules: {
+      ...react.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+      ...tseslint.configs.recommended.rules,
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
+      'react/jsx-uses-react': 'off',
+      'react/jsx-uses-vars': 'error',
+      'react/jsx-key': 'error',
+      'react/jsx-no-duplicate-props': 'error',
+      'react/jsx-no-undef': 'error',
+      'react/no-unescaped-entities': 'warn',
+      'react/no-unknown-property': 'error',
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      '@typescript-eslint/no-empty-interface': 'warn',
+      '@typescript-eslint/no-empty-object-type': 'off',
+      'no-prototype-builtins': 'off',
+      'no-control-regex': 'off',
+      'no-misleading-character-class': 'off',
+      'no-cond-assign': 'off',
+      'no-unreachable': 'off',
+      'no-empty': 'off',
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
+  },
+
+  // Common rules for all files
+  {
+    files: ['**/*.{js,jsx,ts,tsx}'],
+    rules: {
+      'no-undef': 'error',
+      'no-unused-vars': 'off',
+    },
+  },
+
   prettierConfig,
 ]
