@@ -1,82 +1,67 @@
 {
-  "name": "tauri-app",
-  "private": true,
-  "version": "0.1.0",
+  "name": "tauri-template",
+  "version": "1.0.0",
+  "description": "A Tauri 2 + React + TypeScript template with comprehensive tooling",
   "type": "module",
+  "main": "create.js",
+  "bin": {
+    "create-tauri-template": "./create.js"
+  },
+  "files": [
+    "create.js",
+    "template/**/*"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "tauri": "tauri",
+    "create": "node create.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typecheck": "tsc --noEmit",
     "prepare": "husky",
-    "commit": "git-cz",
-    "release": "standard-version",
-    "release:minor": "standard-version --release-as minor",
-    "release:major": "standard-version --release-as major",
-    "release:patch": "standard-version --release-as patch"
+    "commit": "git-cz"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,md,yml,yaml}": [
-      "prettier --write"
-    ]
+    "*": "node lint-staged.js"
   },
   "config": {
     "commitizen": {
       "path": "./cz-config.js"
     }
   },
-  "dependencies": {
-    "@radix-ui/react-dialog": "^1.1.15",
-    "@radix-ui/react-dropdown-menu": "^2.1.16",
-    "@radix-ui/react-label": "^2.1.7",
-    "@radix-ui/react-select": "^2.2.6",
-    "@radix-ui/react-slot": "^1.2.3",
-    "@radix-ui/react-switch": "^1.2.6",
-    "@radix-ui/react-tabs": "^1.1.13",
-    "@tauri-apps/api": "^2",
-    "@tauri-apps/plugin-opener": "^2",
-    "autoprefixer": "^10.4.21",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "lucide-react": "^0.542.0",
-    "postcss": "^8.5.6",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "tailwind-merge": "^3.3.1"
+  "keywords": [
+    "tauri",
+    "react",
+    "typescript",
+    "template",
+    "starter",
+    "vite",
+    "tailwindcss"
+  ],
+  "author": "anypond",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anypond/tauri-template.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "devDependencies": {
+    "chalk": "^5.6.1",
+    "commander": "^12.1.0",
+    "fs-extra": "^11.3.1",
+    "inquirer": "^9.3.7",
+    "ora": "^8.2.0",
+    "validate-npm-package-name": "^5.0.1",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.35.0",
-    "@tauri-apps/cli": "^2",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
-    "@typescript-eslint/eslint-plugin": "^8.42.0",
-    "@typescript-eslint/parser": "^8.42.0",
-    "@vitejs/plugin-react": "^4.6.0",
-    "autoprefixer": "^10.4.21",
     "commitizen": "^4.3.1",
     "eslint": "^9.35.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.6",
-    "postcss": "^8.5.6",
     "prettier": "^3.6.2",
-    "standard-version": "^9.5.0",
-    "tailwindcss": "^3.4.1",
-    "typescript": "~5.8.3",
-    "vite": "^7.0.4",
     "word-wrap": "^1.2.5"
   }
 }

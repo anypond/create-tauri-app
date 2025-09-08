@@ -1,5 +1,5 @@
-# Logs
-logs
+# Dependencies
+node_modules/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -7,16 +7,39 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Build outputs
+dist/
+dist-ssr/
 *.local
 
+# Template generated projects (when testing)
+test-*/
+temp-*/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
 # Editor directories and files
-.idea
-.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Tauri specific
+src-tauri/target/
