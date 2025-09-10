@@ -1,4 +1,4 @@
-# Tauri 2 + React + TypeScript Template Creator
+# create-anypond-tauri - Tauri 2 + React + TypeScript Template Creator
 
 一个用于创建 Tauri 2 桌面应用程序的命令行工具，提供开箱即用的开发模板。
 
@@ -26,10 +26,10 @@
 
 ```bash
 # 全局安装模板创建工具
-npm install -g tauri-template
+npm install -g create-anypond-tauri
 
 # 或使用 npx
-npx tauri-template
+npx create-anypond-tauri
 ```
 
 ### 直接使用（推荐）
@@ -61,7 +61,7 @@ pnpm tauri dev
 pnpm create my-app
 
 # 或使用全局安装的命令
-create-tauri-template my-app
+create-anypond-tauri my-app
 ```
 
 ### 2. 交互式配置
@@ -127,7 +127,7 @@ pnpm commit
 ## 📁 项目结构
 
 ```
-tauri-template/
+create-anypond-tauri/
 ├── create.js              # 主创建脚本
 ├── package.json           # 工具项目配置
 ├── eslint.config.js       # ESLint 配置（支持主项目和模板）

@@ -1,11 +1,11 @@
 {
-  "name": "tauri-template",
+  "name": "create-anypond-tauri",
   "version": "1.0.0",
   "description": "A Tauri 2 + React + TypeScript template with comprehensive tooling",
   "type": "module",
   "main": "create.js",
   "bin": {
-    "create-tauri-template": "./create.js"
+    "create-anypond-tauri": "./create.js"
   },
   "files": [
     "create.js",

@@ -15,7 +15,7 @@ const execAsync = promisify(exec)
 const spinner = ora()
 
 program
-  .name('create-tauri-template')
+  .name('create-anypond-tauri')
   .description('Create a new Tauri 2 + React + TypeScript project')
   .argument('[project-name]', 'Project name')
   .option('-f, --force', 'Overwrite target directory if it exists')
