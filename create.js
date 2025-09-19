@@ -79,7 +79,14 @@ program
       spinner.succeed('Project directory created')
 
       // Get template directory
-      const templateDir = path.dirname(new URL(import.meta.url).pathname)
+      const currentFileUrl = new URL(import.meta.url)
+      let templateDir = path.dirname(currentFileUrl.pathname)
+
+      // Fix Windows path issue (remove leading slash)
+      if (process.platform === 'win32' && templateDir.startsWith('/')) {
+        templateDir = templateDir.substring(1)
+      }
+
       const templatePath = path.join(templateDir, 'template')
 
       // Copy template files
