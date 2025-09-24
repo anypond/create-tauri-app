@@ -45,10 +45,13 @@ npm publish --access public
 
 ```bash
 # 使用 pnpm create
-pnpm create tauri-template my-app
+pnpm create @anypond/create-tauri-app my-app
 
 # 使用 npx
-npx create-tauri-template my-app
+npx @anypond/create-tauri-app my-app
+
+# 或使用命令行工具
+create-tauri-app my-app
 ```
 
 ## 注意事项

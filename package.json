@@ -1,11 +1,11 @@
 {
-  "name": "create-anypond-tauri",
+  "name": "@anypond/create-tauri-app",
   "version": "1.0.0",
-  "description": "A Tauri 2 + React + TypeScript template with comprehensive tooling",
+  "description": "A CLI tool to create Tauri 2 + React + TypeScript applications with comprehensive tooling",
   "type": "module",
   "main": "create.js",
   "bin": {
-    "create-anypond-tauri": "./create.js"
+    "create-tauri-app": "./create.js"
   },
   "files": [
     "create.js",
@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "create": "node create.js",
+    "cta": "node create.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -47,7 +48,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/anypond/tauri-template.git"
+    "url": "https://github.com/anypond/create-tauri-app.git"
   },
   "engines": {
     "node": ">=18.0.0"

@@ -1,4 +1,4 @@
-# create-anypond-tauri - Tauri 2 + React + TypeScript Template Creator
+# @anypond/create-tauri-app - Tauri 2 + React + TypeScript App Creator
 
 一个用于创建 Tauri 2 桌面应用程序的命令行工具，提供开箱即用的开发模板。
 
@@ -13,7 +13,7 @@
 - 📝 **TypeScript** - 类型安全的 JavaScript
 - 🎨 **Tailwind CSS v3** - 实用优先的 CSS 框架
 - 🌙 **深色模式** - 内置主题切换功能
-- 🧩 **Radix UI** - 无障碍的 UI 组件库
+- 🧩 **daisyUI** - 实用优先的 UI 组件库
 - 🔧 **Vite** - 快速的构建工具
 - 📦 **pnpm** - 高效的包管理器
 - ✅ **ESLint + Prettier** - 代码质量和格式化
@@ -26,18 +26,18 @@
 
 ```bash
 # 全局安装模板创建工具
-npm install -g create-anypond-tauri
+npm install -g @anypond/create-tauri-app
 
 # 或使用 npx
-npx create-anypond-tauri
+npx @anypond/create-tauri-app
 ```
 
 ### 直接使用（推荐）
 
 ```bash
 # 克隆仓库
-git clone https://github.com/anypond/tauri-template.git
-cd tauri-template
+git clone https://github.com/anypond/create-tauri-app.git
+cd create-tauri-app
 
 # 安装依赖
 pnpm install
@@ -61,7 +61,7 @@ pnpm tauri dev
 pnpm create my-app
 
 # 或使用全局安装的命令
-create-anypond-tauri my-app
+create-tauri-app my-app
 ```
 
 ### 2. 交互式配置
@@ -127,7 +127,7 @@ pnpm commit
 ## 📁 项目结构
 
 ```
-create-anypond-tauri/
+@anypond/create-tauri-app/
 ├── create.js              # 主创建脚本
 ├── package.json           # 工具项目配置
 ├── eslint.config.js       # ESLint 配置（支持主项目和模板）
@@ -147,7 +147,7 @@ create-anypond-tauri/
 ### 模板项目
 
 - **前端**: React 19, TypeScript 5.8, Vite 7.0
-- **样式**: Tailwind CSS v3, Radix UI
+- **样式**: Tailwind CSS v3, daisyUI
 - **后端**: Tauri 2.0, Rust 1.89
 - **工具**: pnpm, ESLint, Prettier, Husky
 
@@ -183,6 +183,8 @@ cd ..
 
 # 创建测试项目
 node create.js my-test-app
+# 或者使用新的命令
+create-tauri-app my-test-app
 
 # 验证创建的项目
 cd my-test-app
@@ -245,4 +247,4 @@ git commit -m "✨feat: update template dependencies"
 - 完整的开发工具链
 - 代码质量和 Git 提交规范
 - 支持深色模式
-- Radix UI 组件集成
+- daisyUI 组件集成

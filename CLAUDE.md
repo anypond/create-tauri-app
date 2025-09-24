@@ -9,7 +9,7 @@ This is a Tauri 2 + React + TypeScript template creator project. It provides a c
 ## Project Structure
 
 ```
-create-anypond-tauri/
+@anypond/create-tauri-app/
 ├── create.js              # Main CLI script for creating projects
 ├── package.json           # Tool project dependencies and scripts
 ├── eslint.config.js       # ESLint configuration (supports both main and template projects)
@@ -255,5 +255,5 @@ The create.js script includes debug logging:
 
 ```bash
 # Enable debug output
-DEBUG=create-anypond-tauri:* node create.js my-app
+DEBUG=@anypond/create-tauri-app:* node create.js my-app
 ```
