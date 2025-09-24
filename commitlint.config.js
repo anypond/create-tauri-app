@@ -1,28 +1,6 @@
 export default {
   extends: ['@commitlint/config-conventional'],
-  parserPreset: {
-    parserOpts: {
-      headerPattern:
-        /^(?:(\p{Emoji}\p{Emoji_Presentation}?\uFE0F?)\s*)?(\w+)(?:\(([^)]+)\))?: (.+)$/u,
-      headerCorrespondence: ['emoji', 'type', 'scope', 'subject'],
-    },
-  },
-  plugins: [
-    {
-      rules: {
-        'header-emoji': ({ header }) => {
-          const emojiRegex = /(\p{Emoji})/u
-          if (!emojiRegex.test(header)) {
-            return [false, '提交消息必须以 emoji 开头']
-          }
-          return [true, '']
-        },
-      },
-    },
-  ],
   rules: {
-    'header-emoji': [2, 'always'],
-    // 允许的提交类型
     // 允许的提交类型
     'type-enum': [
       2,
@@ -50,7 +28,7 @@ export default {
     'subject-case': [2, 'never', ['sentence-case', 'start-case', 'pascal-case', 'upper-case']],
     'subject-empty': [2, 'never'],
     'subject-full-stop': [2, 'never', '.'],
-    // 头部最大长度（包括emoji）
+    // 头部最大长度
     'header-max-length': [2, 'always', 100],
     // 正文格式
     'body-leading-blank': [1, 'always'],

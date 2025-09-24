@@ -221,13 +221,13 @@ rm -rf test-project
 
 ## Git Commit Conventions
 
-The project uses conventional commits with emoji support:
+The project uses conventional commits:
 
 ### Commit Format
 
-1. **With emoji (recommended)**: `✨feat: 添加新功能`
-2. **With scope**: `🐛fix(template): 修复按钮样式`
-3. **Without emoji**: `fix: 简单修复`
+1. **Basic format**: `feat: 添加新功能`
+2. **With scope**: `fix(template): 修复按钮样式`
+3. **Optional emoji**: `✨feat: 添加新功能` (emoji is optional but supported)
 
 ### Usage
 
@@ -236,7 +236,8 @@ The project uses conventional commits with emoji support:
 pnpm commit
 
 # Manual commit
-git commit -m "✨feat: update template dependencies"
+git commit -m "feat: update template dependencies"
+git commit -m "fix(template): resolve UI issues"
 ```
 
 ## Troubleshooting

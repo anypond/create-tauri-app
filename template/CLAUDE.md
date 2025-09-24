@@ -421,40 +421,41 @@ The template includes these quality scripts in `package.json`:
 
 ## Git Commit Conventions
 
-The project uses conventional commits with emoji support and automated enforcement:
+The project uses conventional commits with automated enforcement:
 
 ### Commit Format
 
-The project supports three commit message formats:
+The project supports standard conventional commit format:
 
-1. **With emoji (recommended)**: `✨feat: 添加新功能`
-2. **With emoji and scope**: `🐛fix(ui): 修复按钮样式`
-3. **Without emoji**: `fix: 简单修复`
+1. **Basic format**: `feat: 添加新功能`
+2. **With scope**: `fix(ui): 修复按钮样式`
+3. **Optional emoji**: `✨feat: 添加新功能` (emoji is optional but supported)
 
 ### Supported Commit Types
 
-| Emoji | Type     | Description    |
-| ----- | -------- | -------------- |
-| ✨    | feat     | 新功能         |
-| 🐛    | fix      | 修复 bug       |
-| 📚    | docs     | 文档更新       |
-| 💎    | style    | 代码格式调整   |
-| 📦    | refactor | 重构           |
-| 🚨    | test     | 增加测试       |
-| 🛠    | build    | 构建相关变动   |
-| ⚙️    | ci       | CI/CD 配置变动 |
-| ♻️    | chore    | 其他修改       |
-| 🗑    | revert   | 回滚           |
+| Type     | Description    |
+| -------- | -------------- |
+| feat     | 新功能         |
+| fix      | 修复 bug       |
+| docs     | 文档更新       |
+| style    | 代码格式调整   |
+| refactor | 重构           |
+| test     | 增加测试       |
+| build    | 构建相关变动   |
+| ci       | CI/CD 配置变动 |
+| chore    | 其他修改       |
+| revert   | 回滚           |
 
 ### Usage
 
 ```bash
-# Interactive commit with emoji support (recommended)
+# Interactive commit (recommended)
 pnpm commit
 
 # Manual commit (must follow format)
-git commit -m "✨feat: add new feature"
-git commit -m "🐛fix(auth): fix login issue"
+git commit -m "feat: add new feature"
+git commit -m "fix(auth): fix login issue"
+git commit -m "docs: update API documentation"
 
 # The prepare script automatically installs Git hooks
 pnpm install
@@ -469,17 +470,16 @@ pnpm install
 
 ### Commitlint Configuration
 
-The project uses custom commitlint configuration to support emoji format:
+The project uses standard commitlint configuration:
 
-- Parser pattern: `^(?:(\p{Emoji})\s*)?(\w+)(?:\(([^)]+)\))?: (.+)$/u`
-- Header correspondence: `['emoji', 'type', 'scope', 'subject']`
-- Maximum header length: 100 characters (including emoji)
+- Follows conventional commit format: `type(scope): subject`
+- Maximum header length: 100 characters
+- Enforces proper commit types and formatting
 
 ### Commitizen Configuration
 
 Custom commitizen configuration (`cz-config.js`) provides:
 
 - Interactive prompts for commit type, scope, and message
-- Automatic emoji insertion based on selected type
 - Optional scope field for better change tracking
-- Proper formatting with no space between emoji and type
+- Proper formatting according to conventional commits
