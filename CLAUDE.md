@@ -33,11 +33,7 @@ This is a Tauri 2 + React + TypeScript template creator project. It provides a c
 │   ├── README.md         # Template project documentation
 │   ├── CLAUDE.md         # Template project Claude guidance
 │   └── ...               # Other configuration files
-├── doc/                   # Documentation
-│   ├── sop-1-environment-setup.md
-│   ├── sop-2-project-creation.md
-│   └── 快速开始指南.md
-└── scripts/               # Legacy scripts (deprecated)
+└── template/              # Template project structure
 ```
 
 ## Development Commands
