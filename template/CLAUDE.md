@@ -12,8 +12,8 @@ This is a Tauri 2 + React + TypeScript template project designed to serve as a f
 [project-name]/
 ├── src/                    # React frontend source code
 │   ├── components/         # Reusable React components
-│   │   └── ui/            # UI components with Radix UI
-│   ├── lib/               # Utility functions
+│   │   ├── theme-toggle.tsx # Theme switching component
+│   │   └── ui/            # UI components directory (uses daisyUI classes directly)
 │   └── assets/            # Static assets
 ├── src-tauri/              # Tauri backend (Rust)
 │   ├── src/               # Rust source code
@@ -85,9 +85,9 @@ pnpm release
 - **Build Tool**: Vite 7.0.4
 - **Location**: `src/`
 - **Entry Point**: `src/main.tsx` → `src/App.tsx`
-- **Styling**: Tailwind CSS v3 with custom component system in `src/index.css`
-- **UI Components**: Radix UI with custom styling
-- **Theme System**: Built-in dark/light mode with CSS variables
+- **Styling**: Tailwind CSS v3 with daisyUI component library in `src/index.css`
+- **UI Components**: daisyUI - pre-built components with semantic class names
+- **Theme System**: Built-in dark/light mode with daisyUI theme system
 
 ### Backend (Tauri + Rust)
 
@@ -154,115 +154,173 @@ const result = await invoke('greet', { name: 'World' })
 - **Always use pnpm** - this is the mandated package manager for all projects
 - **WSL2 GUI support** may be required for Windows development environments
 
-## Tailwind CSS v3 Implementation Notes
+## daisyUI + Tailwind CSS Implementation
 
 ### Critical Configuration Requirements
 
-**Tailwind CSS v3 Configuration**:
+**daisyUI Configuration**:
 
-- Uses `tailwind.config.js` file for configuration
+- Uses `tailwind.config.js` file with daisyUI plugin
 - PostCSS configuration uses `tailwindcss` and `autoprefixer` plugins
-- CSS structure uses `@tailwind` directives and `@apply` syntax
+- CSS structure uses `@tailwind` directives
 
 **Configuration Files**:
 
-- `tailwind.config.js` - Main configuration with theme extensions
+- `tailwind.config.js` - Main configuration with daisyUI plugin and themes
 - `postcss.config.js` - PostCSS plugin configuration
-- `src/index.css` - Custom styles and theme variables
+- `src/index.css` - Custom styles and utilities
 
-**CSS Structure in `template/src/index.css`**:
+**daisyUI Setup in `tailwind.config.js`**:
 
-- `@tailwind base;` - Tailwind base styles
-- `@tailwind components;` - Component styles
-- `@tailwind utilities;` - Utility classes
-- `:root` and `.dark` selectors for theme variables
-- Custom component classes using `@apply` directives
+```javascript
+module.exports = {
+  plugins: [require('daisyui')],
+  daisyui: {
+    themes: ['light', 'dark'],
+    darkTheme: 'dark',
+  },
+}
+```
+
+### daisyUI Component System
+
+**Built-in Components**:
+
+- **Buttons**: `btn`, `btn-primary`, `btn-secondary`, `btn-outline`, `btn-ghost`
+- **Cards**: `card`, `card-body`, `card-title`, `card-actions`
+- **Inputs**: `input`, `input-bordered`, `input-primary`
+- **Forms**: `form-control`, `label`, `label-text`
+- **Alerts**: `alert`, `alert-info`, `alert-success`, `alert-warning`, `alert-error`
+- **Layout**: `hero`, `navbar`, `footer`, `divider`
+
+**Key Benefits**:
+
+- Pre-built, accessible components with consistent styling
+- No need for custom React component wrappers
+- Semantic class names that are easy to understand
+- Built-in dark mode support
+- Responsive design out of the box
 
 ### Theme System
 
-**Configuration**:
+**daisyUI Themes**:
 
-- Theme variables defined in `tailwind.config.js` using HSL format
-- CSS variables mapped to semantic names (`primary`, `secondary`, etc.)
-- Component variants use theme-configured colors
+- Light and dark themes built-in
+- Theme switching via `data-theme` attribute
+- Consistent color tokens across themes
+- Easy theme customization
 
-**Key Implementation Details**:
-
-- Colors: `bg-primary`, `text-primary-foreground`, `bg-secondary`
-- States: `hover:bg-primary/90`, `disabled:opacity-50`
-- Components follow consistent theming patterns
-
-### Component Styling Approach
-
-**CVA (Class Variance Authority)**:
-
-- Button components use CVA for variant management
-- Consistent styling across all UI components
-- Full theme integration with semantic color names
-
-**Component Examples**:
-
-- `Button` variants: `default`, `secondary`, `outline`, `ghost`, `link`
-- `Card` components: `bg-card`, `text-card-foreground`
-- `Input` components: `border-input`, `bg-background`, `placeholder:text-muted-foreground`
-
-### Theme Configuration Structure
-
-**Color System**:
+**Theme Implementation**:
 
 ```javascript
-// tailwind.config.js
-colors: {
-  background: "hsl(var(--background))",
-  foreground: "hsl(var(--foreground))",
-  primary: {
-    DEFAULT: "hsl(var(--primary))",
-    foreground: "hsl(var(--primary-foreground))",
-  },
-  // ... more colors
+// Theme switching in components
+const toggleTheme = () => {
+  const root = document.documentElement
+  root.setAttribute('data-theme', theme === 'light' ? 'dark' : 'light')
 }
 ```
 
-**CSS Variables**:
+### Component Usage Patterns
 
-```css
-:root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --primary: 221.2 83.2% 53.3%;
-  --primary-foreground: 210 40% 98%;
-  // ... more variables
-}
+**Button Examples**:
+
+```html
+<button className="btn btn-primary">Primary Button</button>
+<button className="btn btn-outline">Outline Button</button>
+<button className="btn btn-ghost">Ghost Button</button>
 ```
 
-### Common Development Patterns
+**Card Examples**:
 
-**Using Theme Colors**:
+```html
+<div className="card bg-base-100 shadow-xl">
+  <div className="card-body">
+    <h2 className="card-title">Card Title</h2>
+    <p className="text-base-content/70">Card content</p>
+    <div className="card-actions">
+      <button className="btn btn-primary">Action</button>
+    </div>
+  </div>
+</div>
+```
 
-- `bg-primary` for primary backgrounds
-- `text-primary-foreground` for contrasting text
-- `border-input` for input field borders
-- `bg-muted` for subtle backgrounds
+**Form Examples**:
 
-**Component Variants**:
+```html
+<div className="form-control">
+  <label className="label">
+    <span className="label-text">Username</span>
+  </label>
+  <input type="text" className="input input-bordered" />
+</div>
+```
 
-- Use semantic names, not hardcoded colors
-- Support hover, focus, and disabled states
-- Maintain consistent spacing and typography
+### Color System
 
-### macOS Big Sur Compatibility
+**daisyUI Color Tokens**:
 
-**Browser Support**:
+- `primary` - Primary brand color
+- `secondary` - Secondary color
+- `accent` - Accent color for highlights
+- `neutral` - Neutral colors for text and borders
+- `base-100` - Background color
+- `base-content` - Text color
+- `info`, `success`, `warning`, `error` - Status colors
 
-- Tailwind CSS v3 fully supports macOS Big Sur WebView
-- No issues with CSS variables or modern features
-- Compatible with Safari WebView and system WebViews
+**Usage Examples**:
 
-**Performance Benefits**:
+```html
+<div className="bg-primary text-primary-content">Primary background</div>
+<div className="text-base-content/70">Muted text</div>
+<div className="border-neutral">Neutral border</div>
+```
 
-- Smaller CSS bundle size compared to v4
-- Better build performance and compatibility
-- Reliable PurgeCSS optimization
+### Layout and Spacing
+
+**daisyUI Layout Classes**:
+
+- `container` - Responsive container
+- `grid` - CSS Grid layouts
+- `flex` - Flexbox layouts
+- `divider` - Content separators
+- `mockup-code` - Code display components
+
+**Responsive Design**:
+
+- Built-in responsive utilities
+- Mobile-first approach
+- Consistent breakpoint system
+
+### Accessibility Features
+
+**Built-in Accessibility**:
+
+- All components follow ARIA guidelines
+- Proper focus management
+- Keyboard navigation support
+- Screen reader compatibility
+
+**Theme Accessibility**:
+
+- Sufficient color contrast ratios
+- Clear visual hierarchy
+- Consistent focus indicators
+
+### Performance Benefits
+
+**Optimized CSS**:
+
+- Tree-shaking for unused components
+- Minimal CSS footprint
+- Fast build times
+- Optimized runtime performance
+
+**Development Experience**:
+
+- Rapid prototyping with pre-built components
+- Consistent design system
+- Easy customization and theming
+- Excellent documentation
 
 ## Tauri 2.0 macOS Compatibility
 

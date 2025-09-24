@@ -94,9 +94,9 @@ pnpm tauri build
 - **Framework**: React 19.1.1 with TypeScript 5.8.3
 - **Build Tool**: Vite 7.0.4
 - **Backend**: Tauri 2.0.0 with Rust 1.89.0
-- **Styling**: Tailwind CSS v3 with custom component system
-- **UI Components**: Radix UI with custom styling
-- **Theme System**: Built-in dark/light mode with CSS variables
+- **Styling**: Tailwind CSS v3 with daisyUI component library
+- **UI Components**: daisyUI - pre-built components with semantic class names
+- **Theme System**: Built-in dark/light mode with daisyUI theme system
 
 ## Key Development Patterns
 
@@ -174,8 +174,8 @@ The template's package.json includes:
 
 1. **Code Quality**: ESLint + Prettier with React/TypeScript support
 2. **Git Conventions**: Conventional commits with emoji support
-3. **Theme System**: Dark/light mode with CSS variables
-4. **Component Library**: Reusable UI components with Radix UI
+3. **Theme System**: Dark/light mode with daisyUI theme system
+4. **Component Library**: Pre-built UI components with daisyUI
 5. **Build Optimization**: Vite with fast refresh and optimized builds
 
 ## Important Notes
