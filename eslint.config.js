@@ -10,7 +10,6 @@ export default [
     ignores: [
       'node_modules/**',
       'dist/**',
-      'mcp-server/**',
       'template/src-tauri/target/**',
       'template/**/*.{config.js}',
       'template/**/cz-config.js',

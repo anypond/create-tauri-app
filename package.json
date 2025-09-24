@@ -18,11 +18,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky",
-    "commit": "git-cz",
-    "mcp:dev": "cd mcp-server && pnpm dev",
-    "mcp:build": "cd mcp-server && pnpm build",
-    "mcp:start": "cd mcp-server && pnpm start",
-    "mcp:install": "cd mcp-server && pnpm install"
+    "commit": "git-cz"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -45,10 +41,7 @@
     "template",
     "starter",
     "vite",
-    "tailwindcss",
-    "mcp",
-    "model-context-protocol",
-    "ai-assistant"
+    "tailwindcss"
   ],
   "author": "anypond",
   "license": "MIT",
