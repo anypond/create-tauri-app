@@ -12,21 +12,18 @@ This is a Tauri 2 + React + TypeScript template project designed to serve as a f
 [project-name]/
 ├── src/                    # React frontend source code
 │   ├── components/         # Reusable React components
-│   │   ├── theme-toggle.tsx # Theme switching component
-│   │   └── ui/            # UI components directory (uses daisyUI classes directly)
+│   │   └── theme-toggle.tsx # Theme switching component
 │   └── assets/            # Static assets
 ├── src-tauri/              # Tauri backend (Rust)
 │   ├── src/               # Rust source code
 │   ├── capabilities/       # Tauri capabilities
-│   └── icons/             # Application icons
+│   ├── icons/             # Application icons
+│   └── target/            # Rust build artifacts
 ├── public/                 # Static assets
 │   ├── tauri.svg          # Tauri icon
 │   └── vite.svg           # Vite icon
 ├── .husky/                 # Git hooks (auto-installed)
-│   ├── commit-msg         # Commit message validation
-│   └── pre-commit        # Pre-commit checks
 ├── .vscode/                # VS Code configuration
-│   └── settings.json      # Editor settings
 ├── package.json            # Project dependencies and scripts
 ├── index.html             # HTML entry point
 ├── README.md              # Project documentation
@@ -212,11 +209,17 @@ module.exports = {
 
 **Theme Implementation**:
 
-```javascript
-// Theme switching in components
-const toggleTheme = () => {
+```typescript
+// Theme switching in React component (from theme-toggle.tsx)
+const [theme, setTheme] = React.useState<'light' | 'dark'>('light')
+
+React.useEffect(() => {
   const root = document.documentElement
-  root.setAttribute('data-theme', theme === 'light' ? 'dark' : 'light')
+  root.setAttribute('data-theme', theme)
+}, [theme])
+
+const toggleTheme = () => {
+  setTheme(prev => (prev === 'light' ? 'dark' : 'light'))
 }
 ```
 

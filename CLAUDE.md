@@ -16,24 +16,23 @@ This is a Tauri 2 + React + TypeScript template creator project. It provides a c
 ├── cz-config.js           # Commitizen configuration for conventional commits
 ├── commitlint.config.js   # Commit message validation
 ├── .husky/                # Git hooks (auto-installed)
-├── template/              # Template project structure
-│   ├── src/               # React frontend source code
-│   │   ├── components/    # Reusable React components
-│   │   │   └── ui/       # UI components with Radix UI
-│   │   ├── lib/          # Utility functions
-│   │   └── assets/       # Static assets
-│   ├── src-tauri/         # Tauri backend (Rust)
-│   │   ├── src/          # Rust source code
-│   │   ├── capabilities/  # Tauri capabilities
-│   │   └── icons/        # Application icons
-│   ├── public/            # Static assets
-│   ├── .husky/           # Git hooks (auto-installed in created projects)
-│   ├── .vscode/          # VS Code configuration
-│   ├── package.json       # Template project dependencies
-│   ├── README.md         # Template project documentation
-│   ├── CLAUDE.md         # Template project Claude guidance
-│   └── ...               # Other configuration files
 └── template/              # Template project structure
+    ├── src/               # React frontend source code
+    │   ├── components/    # Reusable React components
+    │   │   └── theme-toggle.tsx # Theme switching component
+    │   └── assets/       # Static assets
+    ├── src-tauri/         # Tauri backend (Rust)
+    │   ├── src/          # Rust source code
+    │   ├── capabilities/  # Tauri capabilities
+    │   ├── icons/        # Application icons
+    │   └── target/       # Rust build artifacts
+    ├── public/            # Static assets
+    ├── .husky/           # Git hooks (auto-installed in created projects)
+    ├── .vscode/          # VS Code configuration
+    ├── package.json       # Template project dependencies
+    ├── README.md         # Template project documentation
+    ├── CLAUDE.md         # Template project Claude guidance
+    └── ...               # Other configuration files
 ```
 
 ## Development Commands
