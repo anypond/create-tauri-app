@@ -90,9 +90,9 @@ pnpm tauri build
 - **Framework**: React 19.1.1 with TypeScript 5.8.3
 - **Build Tool**: Vite 7.0.4
 - **Backend**: Tauri 2.0.0 with Rust 1.89.0
-- **Styling**: Tailwind CSS v3 with daisyUI component library
-- **UI Components**: daisyUI - pre-built components with semantic class names
-- **Theme System**: Built-in dark/light mode with daisyUI theme system
+- **Styling**: Tailwind CSS v3 with DaisyUI component library
+- **UI Components**: DaisyUI - pre-built components with semantic class names
+- **Theme System**: Built-in dark/light mode with DaisyUI theme system
 
 ## Key Development Patterns
 
