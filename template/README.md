@@ -25,6 +25,7 @@
 - ✅ **ESLint + Prettier** - 代码质量和格式化
 - 📝 **Conventional Commits** - 规范的提交信息（支持 emoji）
 - 🔒 **Git Hooks** - 自动化的代码检查
+- 🤖 **Claude Code MCP** - 项目级别的 AI 辅助开发配置
 
 ## 🛠️ 技术栈
 
@@ -85,6 +86,7 @@ pnpm tauri build
 │   └── tauri.conf.json    # Tauri 配置
 ├── .husky/                # Git hooks（自动安装）
 ├── .vscode/                # VS Code 配置
+├── .mcp.json              # Claude Code MCP 配置
 ├── COMMIT_GUIDE.md        # Git 提交规范
 ├── package.json           # 项目配置
 └── dist/                  # 构建输出
@@ -487,6 +489,52 @@ pnpm release:patch   # 补丁版本
 pnpm release:minor  # 次版本
 pnpm release:major  # 主版本
 ```
+
+## 🤖 Claude Code MCP 配置
+
+项目包含 Claude Code 项目级别的 MCP (Model Context Protocol) 服务器配置，提供增强的 AI 辅助开发功能。
+
+### MCP 服务器配置
+
+`.mcp.json` 文件包含项目级别的 MCP 服务器配置：
+
+**Playwright MCP 服务器** (`playwright`):
+
+- 提供浏览器自动化和测试能力
+- 支持网页抓取、UI 测试和网页交互
+- 工具：`mcp__playwright__browser_*` 用于浏览器控制
+
+**Context7 MCP 服务器** (`context7`):
+
+- 提供最新的库文档访问
+- 支持检索代码示例和 API 参考
+- 工具：`mcp__context7__*` 用于文档查询
+- **需要 API 密钥**：要启用 Context7，请修改 `.mcp.json` 添加您的 API 密钥：
+  ```json
+  "args": ["-y", "@upstash/context7-mcp", "--api-key", "YOUR_API_KEY"]
+  ```
+- 获取 API 密钥：https://context7.com
+
+### 使用方法
+
+在 Claude Code 中使用此项目时，MCP 服务器自动可用：
+
+```bash
+# 检查 MCP 服务器状态（在 Claude Code 中）
+/mcp
+
+# 列出可用的 MCP 工具
+# MCP 工具将作为：mcp__playwright__* 和 mcp__context7__* 可用
+```
+
+### 项目级别配置
+
+MCP 配置是项目级别的，意味着：
+
+- 配置存储在项目根目录的 `.mcp.json` 中
+- 设置会被纳入版本控制
+- 项目的所有团队成员都可以使用
+- Claude Code 会在使用这些服务器之前提示批准
 
 ## 📝 脚本命令
 
