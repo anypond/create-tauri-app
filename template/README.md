@@ -20,6 +20,7 @@
 - 🎨 **Tailwind CSS v3** - 成熟的 CSS 框架，完全兼容 macOS Big Sur
 - 🌙 **深色模式** - 内置主题切换功能
 - 🧩 **DaisyUI** - 美观的 UI 组件库
+- 🧩 **DaisyUI** - 美观的 UI 组件库
 - 🔧 **Vite** - 快速的构建工具
 - 📦 **pnpm** - 高效的包管理器
 - ✅ **ESLint + Prettier** - 代码质量和格式化
@@ -34,6 +35,7 @@
 - **TypeScript 5.8.3** - 类型系统
 - **Vite 7.0.4** - 构建工具
 - **Tailwind CSS 3.4.17** - CSS 框架
+- **DaisyUI** - UI 组件库
 - **DaisyUI** - UI 组件库
 - **Lucide React** - 图标库
 
@@ -123,69 +125,29 @@ pnpm tauri build
 
 ## 🎨 样式系统
 
-### Tailwind CSS v3
+### Tailwind CSS + DaisyUI
 
-项目使用 Tailwind CSS v3，具有以下特点：
+项目使用 Tailwind CSS v3 + DaisyUI，具有以下特点：
 
 - **成熟稳定** - 完全兼容 macOS Big Sur 和其他旧版本系统
-- **配置文件** - 使用 `tailwind.config.js` 进行配置
+- **组件化** - DaisyUI 提供丰富的预制组件
 - **主题系统** - 内置深色/浅色模式支持
-- **语义化命名** - 使用语义化的颜色名称
+- **语义化命名** - 使用语义化的类名
 
-### 配置文件
+### DaisyUI 组件系统
 
-**tailwind.config.js** - 主题配置：
+**DaisyUI** 提供丰富的预制组件，开箱即用：
 
-```javascript
-export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
-  theme: {
-    extend: {
-      colors: {
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
-        },
-        // 更多颜色...
-      },
-    },
-  },
-}
-```
+**常用组件**：
 
-**Tailwind 配置** - 在 `tailwind.config.js` 中配置：
+- **按钮**：`btn`, `btn-primary`, `btn-secondary`, `btn-outline`, `btn-ghost`
+- **卡片**：`card`, `card-body`, `card-title`, `card-actions`
+- **输入框**：`input`, `input-bordered`, `input-primary`
+- **表单**：`form-control`, `label`, `label-text`
+- **提示**：`alert`, `alert-info`, `alert-success`, `alert-warning`, `alert-error`
+- **布局**：`hero`, `navbar`, `footer`, `divider`
 
-```javascript
-export default {
-  darkMode: 'class',
-  plugins: [require('daisyui')],
-  daisyui: {
-    themes: ['light', 'dark'],
-    darkTheme: 'dark',
-  },
-}
-```
-
-**CSS 样式** - 在 `src/index.css` 中定义：
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* 自定义渐变工具类 */
-@layer utilities {
-  .bg-gradient-to-br {
-    background: linear-gradient(135deg, theme('colors.primary'), theme('colors.primary') / 80);
-  }
-}
-```
-
-### DaisyUI 组件使用
-
-DaisyUI 直接使用语义化类名，无需额外配置：
+**使用示例**：
 
 ```html
 <!-- 按钮组件 -->
@@ -197,7 +159,10 @@ DaisyUI 直接使用语义化类名，无需额外配置：
 <div className="card bg-base-100 shadow-xl">
   <div className="card-body">
     <h2 className="card-title">卡片标题</h2>
-    <p>卡片内容</p>
+    <p className="text-base-content/70">卡片内容</p>
+    <div className="card-actions">
+      <button className="btn btn-primary">操作</button>
+    </div>
   </div>
 </div>
 
@@ -243,20 +208,19 @@ const result = await invoke('greet', { name: 'World' })
 
 ## 🌙 主题系统
 
-### 主题切换
+### DaisyUI 主题系统
 
-项目包含完整的主题切换系统：
+DaisyUI 提供内置的主题系统，支持深色/浅色模式：
 
 ```typescript
+// 主题切换组件
 import { ThemeToggle } from "./components/theme-toggle";
 
 // 在组件中使用
 <ThemeToggle />
 ```
 
-### 主题状态管理
-
-主题状态通过 CSS 类控制：
+**主题切换机制**：
 
 - 浅色模式：`<html>` 元素移除 `.dark` 类
 - 深色模式：`<html>` 元素添加 `.dark` 类
@@ -265,41 +229,47 @@ import { ThemeToggle } from "./components/theme-toggle";
 
 ## 📱 组件示例
 
-### 按钮组件
+### DaisyUI 组件使用
 
-```typescript
-import { Button } from "./components/ui/button";
+DaisyUI 组件直接使用类名，无需额外包装：
 
-<Button variant="primary" onClick={handleClick}>
-  点击我
-</Button>
-```
+```html
+<!-- 按钮组件 -->
+<button className="btn btn-primary">主要按钮</button>
+<button className="btn btn-outline">轮廓按钮</button>
+<button className="btn btn-secondary">次要按钮</button>
 
-### 输入框组件
+<!-- 输入框组件 -->
+<input type="text" className="input input-bordered" placeholder="请输入内容..." />
 
-```typescript
-import { Input } from "./components/ui/input";
+<!-- 卡片组件 -->
+<div className="card bg-base-100 shadow-xl">
+  <div className="card-body">
+    <h3 className="card-title">卡片标题</h3>
+    <p>卡片内容区域</p>
+    <div className="card-actions justify-end">
+      <button className="btn btn-primary">操作按钮</button>
+    </div>
+  </div>
+</div>
 
-<Input
-  value={value}
-  onChange={(e) => setValue(e.target.value)}
-  placeholder="请输入内容..."
-/>
-```
-
-### 卡片组件
-
-```typescript
-import { Card, CardHeader, CardContent } from "./components/ui/card";
-
-<Card>
-  <CardHeader>
-    <h3 className="heading-3">标题</h3>
-  </CardHeader>
-  <CardContent>
-    <p>内容区域</p>
-  </CardContent>
-</Card>
+<!-- 警告组件 -->
+<div className="alert alert-info">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="stroke-current shrink-0 h-6 w-6"
+    fill="none"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+    />
+  </svg>
+  <span>这是一个信息提示框。</span>
+</div>
 ```
 
 ## 🛠️ 开发工具
@@ -605,5 +575,6 @@ pnpm release:major  # 主版本   (1.0.0 → 2.0.0)
 - [Tauri 文档](https://tauri.app/)
 - [React 文档](https://react.dev/)
 - [Tailwind CSS v3 文档](https://tailwindcss.com/)
+- [DaisyUI 文档](https://daisyui.com/)
 - [TypeScript 文档](https://www.typescriptlang.org/)
 - [Vite 文档](https://vitejs.dev/)

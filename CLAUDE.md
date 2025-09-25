@@ -16,24 +16,23 @@ This is a Tauri 2 + React + TypeScript template creator project. It provides a c
 ├── cz-config.js           # Commitizen configuration for conventional commits
 ├── commitlint.config.js   # Commit message validation
 ├── .husky/                # Git hooks (auto-installed)
-├── template/              # Template project structure
-│   ├── src/               # React frontend source code
-│   │   ├── components/    # Reusable React components
-│   │   │   └── ui/       # UI components with DaisyUI
-│   │   ├── lib/          # Utility functions
-│   │   └── assets/       # Static assets
-│   ├── src-tauri/         # Tauri backend (Rust)
-│   │   ├── src/          # Rust source code
-│   │   ├── capabilities/  # Tauri capabilities
-│   │   └── icons/        # Application icons
-│   ├── public/            # Static assets
-│   ├── .husky/           # Git hooks (auto-installed in created projects)
-│   ├── .vscode/          # VS Code configuration
-│   ├── package.json       # Template project dependencies
-│   ├── README.md         # Template project documentation
-│   ├── CLAUDE.md         # Template project Claude guidance
-│   └── ...               # Other configuration files
 └── template/              # Template project structure
+    ├── src/               # React frontend source code
+    │   ├── components/    # Reusable React components
+    │   │   └── theme-toggle.tsx # Theme switching component
+    │   └── assets/       # Static assets
+    ├── src-tauri/         # Tauri backend (Rust)
+    │   ├── src/          # Rust source code
+    │   ├── capabilities/  # Tauri capabilities
+    │   ├── icons/        # Application icons
+    │   └── target/       # Rust build artifacts
+    ├── public/            # Static assets
+    ├── .husky/           # Git hooks (auto-installed in created projects)
+    ├── .vscode/          # VS Code configuration
+    ├── package.json       # Template project dependencies
+    ├── README.md         # Template project documentation
+    ├── CLAUDE.md         # Template project Claude guidance
+    └── ...               # Other configuration files
 ```
 
 ## Development Commands
@@ -90,9 +89,9 @@ pnpm tauri build
 - **Framework**: React 19.1.1 with TypeScript 5.8.3
 - **Build Tool**: Vite 7.0.4
 - **Backend**: Tauri 2.0.0 with Rust 1.89.0
-- **Styling**: Tailwind CSS v3 with daisyUI component library
-- **UI Components**: daisyUI - pre-built components with semantic class names
-- **Theme System**: Built-in dark/light mode with daisyUI theme system
+- **Styling**: Tailwind CSS v3 with DaisyUI component library
+- **UI Components**: DaisyUI - pre-built components with semantic class names
+- **Theme System**: Built-in dark/light mode with DaisyUI theme system
 
 ## Key Development Patterns
 
