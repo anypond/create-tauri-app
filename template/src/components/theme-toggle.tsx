@@ -22,8 +22,10 @@ export function ThemeToggle() {
     const html = document.documentElement
     if (dark) {
       html.classList.add('dark')
+      html.setAttribute('data-theme', 'dark')
     } else {
       html.classList.remove('dark')
+      html.setAttribute('data-theme', 'light')
     }
     localStorage.setItem('theme', dark ? 'dark' : 'light')
   }
@@ -33,7 +35,12 @@ export function ThemeToggle() {
   }
 
   return (
-    <button onClick={toggleTheme} className="btn btn-ghost btn-circle" aria-label="切换主题">
+    <button
+      onClick={toggleTheme}
+      className="btn btn-ghost btn-circle theme-controller"
+      aria-label="切换主题"
+      data-theme={isDark ? 'dark' : 'light'}
+    >
       {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
     </button>
   )

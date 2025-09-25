@@ -12,8 +12,8 @@
 - ⚛️ **React 19** - 最新的 React 框架
 - 📝 **TypeScript** - 类型安全的 JavaScript
 - 🎨 **Tailwind CSS v3** - 实用优先的 CSS 框架
-- 🌙 **深色模式** - 内置主题切换功能
-- 🧩 **DaisyUI** - 美观的 UI 组件库
+- 🌙 **深色模式** - 基于 DaisyUI 5.x 的主题切换功能
+- 🧩 **DaisyUI 5.x** - 美观的 UI 组件库
 - 🔧 **Vite** - 快速的构建工具
 - 📦 **pnpm** - 高效的包管理器
 - ✅ **ESLint + Prettier** - 代码质量和格式化

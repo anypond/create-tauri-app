@@ -18,9 +18,8 @@
 - ⚛️ **React 19** - 最新的 React 框架
 - 📝 **TypeScript** - 类型安全的 JavaScript
 - 🎨 **Tailwind CSS v3** - 成熟的 CSS 框架，完全兼容 macOS Big Sur
-- 🌙 **深色模式** - 内置主题切换功能
-- 🧩 **DaisyUI** - 美观的 UI 组件库
-- 🧩 **DaisyUI** - 美观的 UI 组件库
+- 🌙 **深色模式** - 基于 DaisyUI 5.x 的主题切换功能
+- 🧩 **DaisyUI 5.x** - 美观的 UI 组件库
 - 🔧 **Vite** - 快速的构建工具
 - 📦 **pnpm** - 高效的包管理器
 - ✅ **ESLint + Prettier** - 代码质量和格式化
@@ -35,8 +34,7 @@
 - **TypeScript 5.8.3** - 类型系统
 - **Vite 7.0.4** - 构建工具
 - **Tailwind CSS 3.4.17** - CSS 框架
-- **DaisyUI** - UI 组件库
-- **DaisyUI** - UI 组件库
+- **DaisyUI 5.x** - UI 组件库
 - **Lucide React** - 图标库
 
 ### 后端
@@ -109,7 +107,7 @@ pnpm tauri build
 - **TypeScript** - 提供类型安全，减少运行时错误
 - **Vite** - 极快的构建速度和开发服务器热更新
 - **Tailwind CSS v3** - 成熟稳定的 CSS 框架，完全兼容旧系统
-- **DaisyUI** - 美观、易用的 UI 组件库
+- **DaisyUI 5.x** - 美观、易用的 UI 组件库，遵循最新规范
 
 #### 后端技术栈
 
@@ -125,18 +123,19 @@ pnpm tauri build
 
 ## 🎨 样式系统
 
-### Tailwind CSS + DaisyUI
+### Tailwind CSS + DaisyUI 5.x
 
-项目使用 Tailwind CSS v3 + DaisyUI，具有以下特点：
+项目使用 Tailwind CSS v3 + DaisyUI 5.x，具有以下特点：
 
 - **成熟稳定** - 完全兼容 macOS Big Sur 和其他旧版本系统
-- **组件化** - DaisyUI 提供丰富的预制组件
-- **主题系统** - 内置深色/浅色模式支持
+- **组件化** - DaisyUI 5.x 提供丰富的预制组件
+- **主题系统** - 基于 data-theme 属性的深色/浅色模式支持
 - **语义化命名** - 使用语义化的类名
+- **最新规范** - 遵循 DaisyUI 5.x 最新标准，支持 theme-controller 类
 
-### DaisyUI 组件系统
+### DaisyUI 5.x 组件系统
 
-**DaisyUI** 提供丰富的预制组件，开箱即用：
+**DaisyUI 5.x** 提供丰富的预制组件，开箱即用：
 
 **常用组件**：
 
@@ -208,9 +207,9 @@ const result = await invoke('greet', { name: 'World' })
 
 ## 🌙 主题系统
 
-### DaisyUI 主题系统
+### DaisyUI 5.x 主题系统
 
-DaisyUI 提供内置的主题系统，支持深色/浅色模式：
+项目使用 DaisyUI 5.x 最新规范的主题系统，支持深色/浅色模式：
 
 ```typescript
 // 主题切换组件
@@ -220,18 +219,26 @@ import { ThemeToggle } from "./components/theme-toggle";
 <ThemeToggle />
 ```
 
-**主题切换机制**：
+**DaisyUI 5.x 主题切换机制**：
 
-- 浅色模式：`<html>` 元素移除 `.dark` 类
-- 深色模式：`<html>` 元素添加 `.dark` 类
+- 浅色模式：`<html>` 元素设置 `data-theme="light"` 并移除 `.dark` 类
+- 深色模式：`<html>` 元素设置 `data-theme="dark"` 并添加 `.dark` 类
+- 使用 `theme-controller` 类获得最佳主题控制效果
 - 自动检测系统 `prefers-color-scheme` 偏好
 - 使用 localStorage 持久化用户选择
 
+**配置特性**：
+
+- **data-theme 属性**：DaisyUI 5.x 使用 `data-theme` 属性控制主题
+- **向后兼容**：同时支持 CSS 类和 data 属性，确保最大兼容性
+- **主题控制器**：使用 `theme-controller` 类获得完整的主题控制功能
+- **初始化支持**：HTML 根元素默认设置 `data-theme="light"` 属性
+
 ## 📱 组件示例
 
-### DaisyUI 组件使用
+### DaisyUI 5.x 组件使用
 
-DaisyUI 组件直接使用类名，无需额外包装：
+DaisyUI 5.x 组件直接使用类名，无需额外包装：
 
 ```html
 <!-- 按钮组件 -->

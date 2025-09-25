@@ -170,11 +170,12 @@ const result = await invoke('greet', { name: 'World' })
 **daisyUI Setup in `tailwind.config.js`**:
 
 ```javascript
-module.exports = {
+export default {
   plugins: [require('daisyui')],
   daisyui: {
     themes: ['light', 'dark'],
     darkTheme: 'dark',
+    themeRoot: ':root',
   },
 }
 ```
@@ -203,23 +204,34 @@ module.exports = {
 **daisyUI Themes**:
 
 - Light and dark themes built-in
-- Theme switching via CSS `dark` class (DaisyUI v5+)
+- Theme switching via `data-theme` attribute and CSS `dark` class (DaisyUI v5+)
 - Consistent color tokens across themes
 - Easy theme customization
 
 **Theme Implementation**:
 
 ```javascript
-// Theme switching in components
+// Theme switching in components (DaisyUI 5.x)
 const toggleTheme = () => {
   const html = document.documentElement
   if (isDark) {
     html.classList.add('dark')
+    html.setAttribute('data-theme', 'dark')
   } else {
     html.classList.remove('dark')
+    html.setAttribute('data-theme', 'light')
   }
   localStorage.setItem('theme', isDark ? 'dark' : 'light')
 }
+```
+
+**Theme Controller**:
+
+```typescript
+// Theme toggle button with DaisyUI 5.x theme-controller
+<button className="btn btn-ghost btn-circle theme-controller" aria-label="切换主题">
+  {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+</button>
 ```
 
 **Features**:
