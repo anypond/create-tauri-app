@@ -19,7 +19,7 @@
 - 📝 **TypeScript** - 类型安全的 JavaScript
 - 🎨 **Tailwind CSS v3** - 成熟的 CSS 框架，完全兼容 macOS Big Sur
 - 🌙 **深色模式** - 内置主题切换功能
-- 🧩 **Radix UI** - 无障碍的 UI 组件库
+- 🧩 **DaisyUI** - 美观的 UI 组件库
 - 🔧 **Vite** - 快速的构建工具
 - 📦 **pnpm** - 高效的包管理器
 - ✅ **ESLint + Prettier** - 代码质量和格式化
@@ -34,7 +34,7 @@
 - **TypeScript 5.8.3** - 类型系统
 - **Vite 7.0.4** - 构建工具
 - **Tailwind CSS 3.4.17** - CSS 框架
-- **Radix UI** - UI 组件库
+- **DaisyUI** - UI 组件库
 - **Lucide React** - 图标库
 
 ### 后端
@@ -107,7 +107,7 @@ pnpm tauri build
 - **TypeScript** - 提供类型安全，减少运行时错误
 - **Vite** - 极快的构建速度和开发服务器热更新
 - **Tailwind CSS v3** - 成熟稳定的 CSS 框架，完全兼容旧系统
-- **Radix UI** - 无障碍、可定制的 UI 组件基础库
+- **DaisyUI** - 美观、易用的 UI 组件库
 
 #### 后端技术栈
 
@@ -155,51 +155,58 @@ export default {
 }
 ```
 
-**CSS 变量** - 在 `src/index.css` 中定义：
+**Tailwind 配置** - 在 `tailwind.config.js` 中配置：
+
+```javascript
+export default {
+  darkMode: 'class',
+  plugins: [require('daisyui')],
+  daisyui: {
+    themes: ['light', 'dark'],
+    darkTheme: 'dark',
+  },
+}
+```
+
+**CSS 样式** - 在 `src/index.css` 中定义：
 
 ```css
-:root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --primary: 221.2 83.2% 53.3%;
-  --primary-foreground: 210 40% 98%;
-  /* 更多变量... */
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  /* 深色模式变量... */
+/* 自定义渐变工具类 */
+@layer utilities {
+  .bg-gradient-to-br {
+    background: linear-gradient(135deg, theme('colors.primary'), theme('colors.primary') / 80);
+  }
 }
 ```
 
-### 组件样式
+### DaisyUI 组件使用
 
-使用 CVA (Class Variance Authority) 和 `@apply` 指令：
+DaisyUI 直接使用语义化类名，无需额外配置：
 
-```typescript
-// Button 组件示例
-const buttonVariants = cva('基础样式类', {
-  variants: {
-    variant: {
-      default: 'bg-primary text-primary-foreground',
-      secondary: 'bg-secondary text-secondary-foreground',
-      outline: 'border border-input bg-background',
-    },
-  },
-})
-```
+```html
+<!-- 按钮组件 -->
+<button className="btn btn-primary">主要按钮</button>
+<button className="btn btn-outline">轮廓按钮</button>
+<button className="btn btn-ghost">幽灵按钮</button>
 
-### 主题颜色使用
-
-```typescript
-// 在组件中使用
-<div className="bg-primary text-primary-foreground">
-  主要颜色背景，前景色文字
+<!-- 卡片组件 -->
+<div className="card bg-base-100 shadow-xl">
+  <div className="card-body">
+    <h2 className="card-title">卡片标题</h2>
+    <p>卡片内容</p>
+  </div>
 </div>
 
-<div className="bg-muted text-muted-foreground">
-  次要颜色背景，次要文字
+<!-- 表单组件 -->
+<div className="form-control">
+  <label className="label">
+    <span className="label-text">用户名</span>
+  </label>
+  <input type="text" className="input input-bordered" />
 </div>
 ```
 
@@ -251,8 +258,10 @@ import { ThemeToggle } from "./components/theme-toggle";
 
 主题状态通过 CSS 类控制：
 
-- 浅色模式：`<html>` 元素无特殊类
+- 浅色模式：`<html>` 元素移除 `.dark` 类
 - 深色模式：`<html>` 元素添加 `.dark` 类
+- 自动检测系统 `prefers-color-scheme` 偏好
+- 使用 localStorage 持久化用户选择
 
 ## 📱 组件示例
 

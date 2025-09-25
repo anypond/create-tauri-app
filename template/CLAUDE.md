@@ -206,7 +206,7 @@ module.exports = {
 **daisyUI Themes**:
 
 - Light and dark themes built-in
-- Theme switching via `data-theme` attribute
+- Theme switching via CSS `dark` class (DaisyUI v5+)
 - Consistent color tokens across themes
 - Easy theme customization
 
@@ -215,10 +215,22 @@ module.exports = {
 ```javascript
 // Theme switching in components
 const toggleTheme = () => {
-  const root = document.documentElement
-  root.setAttribute('data-theme', theme === 'light' ? 'dark' : 'light')
+  const html = document.documentElement
+  if (isDark) {
+    html.classList.add('dark')
+  } else {
+    html.classList.remove('dark')
+  }
+  localStorage.setItem('theme', isDark ? 'dark' : 'light')
 }
 ```
+
+**Features**:
+
+- System preference detection via `prefers-color-scheme`
+- localStorage persistence
+- Automatic theme initialization
+- Smooth theme transitions
 
 ### Component Usage Patterns
 

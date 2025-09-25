@@ -19,7 +19,7 @@ This is a Tauri 2 + React + TypeScript template creator project. It provides a c
 ├── template/              # Template project structure
 │   ├── src/               # React frontend source code
 │   │   ├── components/    # Reusable React components
-│   │   │   └── ui/       # UI components with Radix UI
+│   │   │   └── ui/       # UI components with DaisyUI
 │   │   ├── lib/          # Utility functions
 │   │   └── assets/       # Static assets
 │   ├── src-tauri/         # Tauri backend (Rust)
@@ -161,7 +161,7 @@ async function createProject(projectName, options) {
 
 The template's package.json includes:
 
-- **Dependencies**: React, TypeScript, Tauri, Tailwind CSS, Radix UI
+- **Dependencies**: React, TypeScript, Tauri, Tailwind CSS, DaisyUI
 - **Dev Dependencies**: ESLint, Prettier, Husky, Commitizen
 - **Scripts**: Development, build, lint, and format commands
 - **Husky Configuration**: Auto-installs Git hooks
@@ -171,7 +171,7 @@ The template's package.json includes:
 1. **Code Quality**: ESLint + Prettier with React/TypeScript support
 2. **Git Conventions**: Conventional commits with emoji support
 3. **Theme System**: Dark/light mode with daisyUI theme system
-4. **Component Library**: Pre-built UI components with daisyUI
+4. **Component Library**: Pre-built UI components with DaisyUI
 5. **Build Optimization**: Vite with fast refresh and optimized builds
 
 ## Important Notes
