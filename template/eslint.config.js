@@ -7,7 +7,7 @@ import prettierConfig from 'eslint-config-prettier'
 
 export default [
   {
-    ignores: ['node_modules/**', 'dist/**', 'src-tauri/**'],
+    ignores: ['node_modules/**', 'dist/**', 'src-tauri/**', '.react-router/**'],
   },
   js.configs.recommended,
   // JavaScript 配置
@@ -31,6 +31,7 @@ export default [
         HTMLButtonElement: 'readonly',
         HTMLDivElement: 'readonly',
         HTMLInputElement: 'readonly',
+        HTMLSelectElement: 'readonly',
         HTMLSpanElement: 'readonly',
         HTMLParagraphElement: 'readonly',
         HTMLHeadingElement: 'readonly',
@@ -98,6 +99,7 @@ export default [
         HTMLButtonElement: 'readonly',
         HTMLDivElement: 'readonly',
         HTMLInputElement: 'readonly',
+        HTMLSelectElement: 'readonly',
         HTMLSpanElement: 'readonly',
         HTMLParagraphElement: 'readonly',
         HTMLHeadingElement: 'readonly',
