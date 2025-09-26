@@ -2,6 +2,7 @@ import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
 import type { ReactNode } from 'react'
 
 import './index.css'
+import './i18n'
 
 export function Layout({ children }: { children: ReactNode }) {
   return (
