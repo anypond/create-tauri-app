@@ -19,7 +19,50 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "preversion": "pnpm lint && pnpm format:check",
+    "version": "standard-version && git add CHANGELOG.md",
+    "postversion": "git push && git push --tags"
+  },
+  "standard-version": {
+    "types": [
+      {
+        "type": "feat",
+        "section": "Features"
+      },
+      {
+        "type": "fix",
+        "section": "Bug Fixes"
+      },
+      {
+        "type": "docs",
+        "section": "Documentation"
+      },
+      {
+        "type": "style",
+        "section": "Styles"
+      },
+      {
+        "type": "refactor",
+        "section": "Code Refactoring"
+      },
+      {
+        "type": "test",
+        "section": "Tests"
+      },
+      {
+        "type": "build",
+        "section": "Build System"
+      },
+      {
+        "type": "ci",
+        "section": "Continuous Integration"
+      },
+      {
+        "type": "chore",
+        "section": "Chores"
+      }
+    ]
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -76,6 +119,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.1.6",
     "prettier": "^3.6.2",
+    "standard-version": "^9.5.0",
     "typescript": "^5.9.2"
   }
 }
