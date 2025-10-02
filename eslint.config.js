@@ -12,6 +12,8 @@ export default [
       'dist/**',
       'template/dist/**',
       'template/src-tauri/target/**',
+      'template/.react-router/**',
+      'template/react-router.config.ts',
       'template/**/*.{config.js}',
       'template/eslint.config.js',
       'template/**/cz-config.js',
