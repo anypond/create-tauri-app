@@ -28,10 +28,22 @@ npm login
 
 ### 2. 更新版本号
 
+**推荐使用标准版本管理：**
+
 ```bash
-# 更新 package.json 中的版本号
-npm version patch  # 或 minor/major
+# 使用 standard-version (推荐，会自动生成变更日志)
+pnpm version patch    # 或 minor/major
+
+# 或者使用 npm version (仅更新版本号)
+npm version patch     # 或 minor/major
 ```
+
+**使用 standard-version 的优势：**
+
+- 自动生成符合规范的提交消息
+- 自动更新 CHANGELOG.md
+- 支持语义化版本控制
+- 遵循项目的提交规范
 
 ### 3. 发布
 
