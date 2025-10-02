@@ -1,6 +1,6 @@
 {
   "name": "@anypond/create-tauri-app",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "A CLI tool to create Tauri 2 + React + TypeScript applications with comprehensive tooling",
   "type": "module",
   "main": "create.js",
